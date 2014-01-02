@@ -73,7 +73,7 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
     <?php endif; ?>
         <div id="cl-wrapper" <?php if($_loginPage):?> class="login-container" <?php endif; ?>>
             <?php if(!$_loginPage):?>
-                echo $this->element('sidebar') ;
+               <?php echo $this->element('sidebar') ; ?>
 
             <div class="container-fluid" id="pcont">
                 <div class="page-head">
