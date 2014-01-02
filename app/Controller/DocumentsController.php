@@ -138,8 +138,10 @@ class DocumentsController extends AppController {
 		if (!$this->Document->exists($id)) {
 			throw new NotFoundException(__('Invalid document'));
 		}
+        $this->Document->id = $id;
 		$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-		$this->set('document', $this->Document->find('first', $options));
+        $_document = $this->Document->find('first', $options);
+        $this->set('document',$_document);
 	}
 
 /**
@@ -149,6 +151,7 @@ class DocumentsController extends AppController {
  */
 	public function admin_add() {
 		if ($this->request->is('post')) {
+
             //begin upload file
             $fileupload = $this->_uploadFiles('documents', $this->request->data['Document']['file_upload']);
             if(array_key_exists('urls', $fileupload)) {
@@ -201,6 +204,18 @@ class DocumentsController extends AppController {
 		}
         $this->Document->id = $id;
 		if ($this->request->is(array('post', 'put'))) {
+
+            //begin upload file
+            if($this->request->data['Document']['file_upload']['name']){
+                $fileupload = $this->_uploadFiles('documents', $this->request->data['Document']['file_upload']);
+
+            }
+            if(array_key_exists('urls', $fileupload)) {
+                // save the url in the form data
+                $this->request->data['Document']['document_file'] = $fileupload['urls'][0];
+            }
+
+            //end upload file
 			if ($this->Document->save($this->request->data)) {
 				$this->Session->setFlash(__('The document has been saved.'),'default',
                     array('class' => 'alert alert-success'));
@@ -212,7 +227,6 @@ class DocumentsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
 			$this->request->data = $this->Document->find('first', $options);
-            $this->request->data['Document']['file_upload'] = $this->request->data['Document']['document_file'] ;
 		}
 		$doctypes = $this->Document->Doctype->find('list',array(
             'fields' => array('Doctype.doctype_id','Doctype.doctype_name'),
