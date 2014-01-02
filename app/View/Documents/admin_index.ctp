@@ -71,7 +71,7 @@
                                     <td class=" "><?php echo $this->Html->link(h($document['Document']['docment_name']),array('action'=>'view',$document['Document']['docment_id']))   ?></td>
                                     <td class=" "><?php echo $document['Document']['document_desc']  ?></td>
                                     <td class="center "><?php echo h($document['Document']['document_signdate'])  ?></td>
-                                    <td class="center "><?php echo h($document['Document']['document_status'])  ?></td>
+                                    <td class="center "><?php if(h($document['Document']['document_status'])){echo 'Hiển thị';} else{echo 'Ẩn';}  ?></td>
                                     <td class="center ">
                                         <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action' => 'edit', $document['Document']['docment_id']),array('class'=>'label label-default','escape'=>false)); ?>
                                         <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('action' => 'delete', $document['Document']['docment_id']),array('class'=>'label label-danger','escape'=>false)); ?>

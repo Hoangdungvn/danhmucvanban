@@ -1,85 +1,62 @@
-<div class="documents view">
-<h2><?php echo __('Document'); ?></h2>
-	<dl>
-		<dt><?php echo __('Docment Id'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['docment_id']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Docment Name'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['docment_name']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document Desc'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_desc']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Docment Created'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['docment_created']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Docment Modifier'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['docment_modifier']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document Signdate'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_signdate']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document Signer'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_signer']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document Status'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_status']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document File'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_file']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Document View'); ?></dt>
-		<dd>
-			<?php echo h($document['Document']['document_view']); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Doctype'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($document['Doctype']['doctype_id'], array('controller' => 'doctypes', 'action' => 'view', $document['Doctype']['doctype_id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Organ'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($document['Organ']['organ_id'], array('controller' => 'organs', 'action' => 'view', $document['Organ']['organ_id'])); ?>
-			&nbsp;
-		</dd>
-		<dt><?php echo __('Cat'); ?></dt>
-		<dd>
-			<?php echo $this->Html->link($document['Cat']['cat_id'], array('controller' => 'cats', 'action' => 'view', $document['Cat']['cat_id'])); ?>
-			&nbsp;
-		</dd>
-	</dl>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Document'), array('action' => 'edit', $document['Document']['docment_id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Document'), array('action' => 'delete', $document['Document']['docment_id']), null, __('Are you sure you want to delete # %s?', $document['Document']['docment_id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Documents'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Document'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Doctypes'), array('controller' => 'doctypes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Doctype'), array('controller' => 'doctypes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Organs'), array('controller' => 'organs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Organ'), array('controller' => 'organs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-	</ul>
+
+<?php echo $this->Html->addCrumb('Xem chi tiết') ?>
+<div class="row">
+    <h3 class="text-center">Thông tin chi tiết về văn bản</h3>
+    <table class="table .table-responsive">
+        <tbody>
+        <tr>
+            <td class="col-md-3 col-sm-3">Tên Văn bản</td>
+            <td class="col-md-9 col-sm-9"><?php echo $document['Document']['docment_name'] ?></td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3" >Mô tả về văn bản</td>
+            <td class="col-md-9 col-sm-9"><?php echo $document['Document']['document_desc'] ?></td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Loại Văn Bản</td>
+            <td class="col-md-9 col-sm-9"><?php echo $this->Html->link($document['Doctype']['doctype_name'], array('controller' => 'doctypes', 'action' => 'view', $document['Doctype']['doctype_id'])); ?>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Cơ Quan Ban Hành</td>
+            <td class="col-md-9 col-sm-9"><?php echo $this->Html->link($document['Organ']['organ_name'], array('controller' => 'organs', 'action' => 'view', $document['Organ']['organ_id'])); ?>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Lĩnh Vực</td>
+            <td class="col-md-9 col-sm-9"><?php echo $this->Html->link($document['Cat']['cat_name'], array('controller' => 'cats', 'action' => 'view', $document['Cat']['cat_id'])); ?>
+            </td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Ngày Ký</td>
+            <td class="col-md-9 col-sm-9"><?php echo h($document['Document']['document_signdate']); ?></td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Người Ký</td>
+            <td class="col-md-9 col-sm-9"><?php echo h($document['Document']['document_signer']); ?></td>
+        </tr>
+        <?php if($document['Document']['document_file']): ?>
+        <tr>
+            <td class="col-md-3 col-sm-3">File Đính Kèm</td>
+            <td class="col-md-9 col-sm-9">
+                <?php
+                    echo $this->Html->link(
+                        'Xem',
+                        $this->webroot.$document['Document']['document_file'],
+                        array('class' => 'button', 'target' => '_blank')
+                    );
+                 ?>
+            </td>
+        </tr>
+        <?php endif;?>
+        <tr>
+            <td class="col-md-3 col-sm-3">Trạng Thái</td>
+            <td class="col-md-9 col-sm-9"><?php if($document['Document']['document_status']){echo "Hiển thị";} else {echo "Ẩn";} ?></td>
+        </tr>
+        <tr>
+            <td class="col-md-3 col-sm-3">Số lượt xem</td>
+            <td class="col-md-9 col-sm-9"><?php echo h($document['Document']['document_view']); ?></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
