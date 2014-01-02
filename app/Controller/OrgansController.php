@@ -136,10 +136,10 @@ class OrgansController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Organ->create();
 			if ($this->Organ->save($this->request->data)) {
-				$this->Session->setFlash(__('The organ has been saved.'));
+				$this->Session->setFlash(__('Cơ quan đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The organ could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Cơ quan chưa được lưu. Xin hãy thử lại'));
 			}
 		}
 	}
@@ -157,10 +157,10 @@ class OrgansController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Organ->save($this->request->data)) {
-				$this->Session->setFlash(__('The organ has been saved.'));
+				$this->Session->setFlash(__('Cơ quan đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The organ could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Cơ quan chưa được lưu. Xin hãy thử lại'));
 			}
 		} else {
 			$options = array('conditions' => array('Organ.' . $this->Organ->primaryKey => $id));
@@ -182,9 +182,9 @@ class OrgansController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Organ->delete()) {
-			$this->Session->setFlash(__('The organ has been deleted.'));
+			$this->Session->setFlash(__('Cơ quan đã được xóa.'));
 		} else {
-			$this->Session->setFlash(__('The organ could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Cơ quan chưa được xóa. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

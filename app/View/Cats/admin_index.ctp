@@ -1,25 +1,25 @@
 <div class="cats index">
-	<h2><?php echo __('Cats'); ?></h2>
+	<h2><?php echo __('Quản lý lĩnh vực'); ?></h2>
 	<table cellpadding="0" cellspacing="0">
-	<tr>
-			<th><?php echo $this->Paginator->sort('cat_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('cat_name'); ?></th>
-			<th><?php echo $this->Paginator->sort('cat_desc'); ?></th>
-			<th><?php echo $this->Paginator->sort('cat_status'); ?></th>
-			<th><?php echo $this->Paginator->sort('cat_order'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+	<tr style="background: #e7e7e7;" align="center">
+			<th><?php echo $this->Paginator->sort('cat_id','Mã'); ?></th>
+			<th><?php echo $this->Paginator->sort('cat_name','Lĩnh vực'); ?></th>
+			<th><?php echo $this->Paginator->sort('cat_desc','Mô tả'); ?></th>
+			<th><?php echo $this->Paginator->sort('cat_status','Trạng thái'); ?></th>
+			<th><?php echo $this->Paginator->sort('cat_order',"sắp xếp"); ?></th>
+			<th class="actions"><?php echo __('Chức năng'); ?></th>
 	</tr>
 	<?php foreach ($cats as $cat): ?>
 	<tr>
 		<td><?php echo h($cat['Cat']['cat_id']); ?>&nbsp;</td>
 		<td><?php echo h($cat['Cat']['cat_name']); ?>&nbsp;</td>
-		<td><?php echo h($cat['Cat']['cat_desc']); ?>&nbsp;</td>
+		<td><?php echo html_entity_decode($cat['Cat']['cat_desc'], ENT_QUOTES, 'UTF-8'); ?></td>
 		<td><?php echo h($cat['Cat']['cat_status']); ?>&nbsp;</td>
 		<td><?php echo h($cat['Cat']['cat_order']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $cat['Cat']['cat_id'])); ?>
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $cat['Cat']['cat_id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $cat['Cat']['cat_id']), null, __('Are you sure you want to delete # %s?', $cat['Cat']['cat_id'])); ?>
+			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $cat['Cat']['cat_id']), null, __('Bạn có muốn xóa lĩnh vực có id = %s?', $cat['Cat']['cat_id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -32,9 +32,11 @@
 	?>	</p>
 	<div class="paging">
 	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+        if($this->Paginator->numbers(array('separator' => ' '))){
+            echo $this->Paginator->prev('<< ' . __('Lùi '), array(), null, array('class' => 'prev disabled'));
+            echo $this->Paginator->numbers(array('separator' => ' '));
+            echo $this->Paginator->next(__(' Tiến') . ' >>', array(), null, array('class' => 'next disabled'));
+        }
 	?>
 	</div>
 </div>

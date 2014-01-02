@@ -109,7 +109,9 @@ class CatsController extends AppController {
  */
 	public function admin_index() {
 		$this->Cat->recursive = 0;
-		$this->set('cats', $this->Paginator->paginate());
+        $this->Paginator->settings = array('limit'=>10);
+
+        $this->set('cats', $this->Paginator->paginate());
 	}
 
 /**
@@ -136,10 +138,10 @@ class CatsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Cat->create();
 			if ($this->Cat->save($this->request->data)) {
-				$this->Session->setFlash(__('The cat has been saved.'));
+				$this->Session->setFlash(__('Lĩnh vực đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The cat could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Lĩnh vực chưa lưu được. Xin hãy thử lại.'));
 			}
 		}
 	}
@@ -157,10 +159,10 @@ class CatsController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Cat->save($this->request->data)) {
-				$this->Session->setFlash(__('The cat has been saved.'));
+				$this->Session->setFlash(__('Lĩnh vực đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The cat could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Lĩnh vực chưa lưu được. Xin hãy thử lại.'));
 			}
 		} else {
 			$options = array('conditions' => array('Cat.' . $this->Cat->primaryKey => $id));
@@ -182,9 +184,9 @@ class CatsController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Cat->delete()) {
-			$this->Session->setFlash(__('The cat has been deleted.'));
+			$this->Session->setFlash(__('Lĩnh vực đã được xóa.'));
 		} else {
-			$this->Session->setFlash(__('The cat could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Lĩnh vực chưa được xóa. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}
