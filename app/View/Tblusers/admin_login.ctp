@@ -1,4 +1,3 @@
-<div id="cl-wrapper" class="login-container">
 
     <div class="middle-login">
         <div class="block-flat">
@@ -36,5 +35,3 @@
         </div>
         <div class="text-center out-links"><a href="#">© 2013 Your Company</a></div>
     </div>
-
-</div>

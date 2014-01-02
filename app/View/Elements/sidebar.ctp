@@ -2,7 +2,7 @@
     <div class="cl-toggle"><i class="fa fa-bars"></i></div>
     <div class="cl-navblock">
         <ul class="cl-vnavigation">
-            <li><a href="index-2.html"><i class="fa fa-home"></i>Quản lý văn bản</a></li>
+            <li><a href="<?php echo $this->Html->url(array('controller' => 'posts', 'action' => 'view', 5)) ?>"><i class="fa fa-home"></i>Quản lý văn bản</a></li>
             <li class="parent"><a href="#"><i class="fa fa-smile-o"></i>Quản lý loại văn bản</a></li>
             <li class="parent"><a href="#"><i class="fa fa-list-alt"></i>Quản lý Cơ quan ban hành</a>
             </li>

@@ -72,10 +72,9 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
         </div>
     <?php endif; ?>
         <div id="cl-wrapper" <?php if($_loginPage):?> class="login-container" <?php endif; ?>>
-            <?php if(!$_loginPage){
+            <?php if(!$_loginPage):?>
                 echo $this->element('sidebar') ;
-            }
-            ?>
+
             <div class="container-fluid" id="pcont">
                 <div class="page-head">
                     <?php if(isset($head_title)):?>
@@ -86,9 +85,12 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
                 </div>
                 <div class="cl-mcont">
                     <?php echo $this->Session->flash(); ?>
+            <?php endif; ?>
                     <?php echo $this->fetch('content'); ?>
+            <?php if(!$_loginPage):?>
                 </div>
             </div>
+            <?php endif;?>
         </div>
 </body>
 </html>
