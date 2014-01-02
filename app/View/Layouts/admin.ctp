@@ -81,7 +81,10 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
                     <h2><?php echo $head_title ?></h2>
                     <?php endif; ?>
 
-                    <?php echo $this->Html->getCrumbs(' / ', 'Trang chủ ') ?>
+                    <?php echo $this->Html->getCrumbs(' / ', array(
+                        'text' => 'Trang chủ',
+                        'url' => array('controller' => 'documents', 'action' => 'index', 'admin'=>true,'prefix'=>'admin')
+                    )); ?>
                 </div>
                 <div class="cl-mcont">
                     <?php echo $this->Session->flash(); ?>

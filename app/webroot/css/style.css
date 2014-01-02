@@ -3016,3 +3016,11 @@ button::-moz-focus-inner {
 .tbl-documents a.btn {
     float: right;
 }
+
+.table-documents th{
+    background-color:#3380FF;
+    color: #fff;
+}
+.error-message{
+    color: red;
+}

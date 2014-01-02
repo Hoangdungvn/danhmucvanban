@@ -1,34 +1,104 @@
-<div class="documents form">
-<?php echo $this->Form->create('Document'); ?>
-	<fieldset>
-		<legend><?php echo __('Admin Add Document'); ?></legend>
-	<?php
-		echo $this->Form->input('docment_name');
-		echo $this->Form->input('document_desc');
-		echo $this->Form->input('docment_created');
-		echo $this->Form->input('docment_modifier');
-		echo $this->Form->input('document_signdate');
-		echo $this->Form->input('document_signer');
-		echo $this->Form->input('document_status');
-		echo $this->Form->input('document_file');
-		echo $this->Form->input('document_view');
-		echo $this->Form->input('doctype_id');
-		echo $this->Form->input('organ_id');
-		echo $this->Form->input('cat_id');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
+<?php echo $this->Html->addCrumb('Thêm văn bản') ?>
 
-		<li><?php echo $this->Html->link(__('List Documents'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Doctypes'), array('controller' => 'doctypes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Doctype'), array('controller' => 'doctypes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Organs'), array('controller' => 'organs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Organ'), array('controller' => 'organs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cats'), array('controller' => 'cats', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cat'), array('controller' => 'cats', 'action' => 'add')); ?> </li>
-	</ul>
+
+<div class="row">
+    <div class="col-sm-12 col-md-12">
+        <div class="block-flat">
+            <div class="header">
+                <h3>Thêm văn bản</h3>
+            </div>
+            <div class="content">
+                <?php echo $this->Form->create('Document',array(
+                    "parsley-validate" => "",
+                     "novalidate" => "",
+                     'type' => 'file'
+                ));
+                ?>
+                <?php
+                    echo $this->Form->input('docment_name',array(
+                        'label' => 'Tên Văn Bản <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+                        'placeholder' => 'Tên văn bản',
+
+                    ));
+                    echo $this->Form->input('document_desc',array(
+                        'type' => 'textarea',
+                        'label' => 'Mô Tả Văn Bản <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'ckeditor form-control',
+                        'placeholder' => 'Mô tả văn bản văn bản'
+
+                    ));
+
+                    echo $this->Form->input('document_signdate',array(
+                        'label' => 'Ngày Ký <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+                    ));
+                    echo $this->Form->input('document_signer',array(
+                        'label' => 'Người Ký <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+                        'placeholder' => 'Người ký'
+
+                    ));
+
+
+                    echo $this->Form->input('doctype_id',array(
+                        'label' => 'Loại Văn Bản <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+
+                    ));
+                    echo $this->Form->input('organ_id',array(
+                        'label' => 'Cơ Quan Ban Hành <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+
+                    ));
+                    echo $this->Form->input('cat_id',array(
+                        'label' => 'Lĩnh Vực <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+                    ));
+
+                    echo $this->Form->input('file_upload',array(
+                        'type' => 'file',
+                        'label' => 'File Đính Kèm'
+                    ));
+
+                    echo $this->Form->input('document_status',array(
+                        'label' => 'Trạng Thái <em>*</em>',
+                        'div' => 'form-group',
+                        'parsley-trigger' => 'change',
+                        'required' => '',
+                        'class'    => 'form-control',
+                        'options'   => array('0'=>'Disable', '1' => 'Enable'),
+                        'default'   => '1'
+
+                    ));
+                ?>
+
+                    <?php echo $this->Form->button('Submit', array('type' => 'submit','class'=>'btn btn-primary')); ?>
+                    <?php echo $this->Form->button('Cancel', array('type' => 'reset','class'=>'btn btn-default'));?>
+                <?php echo $this->Form->end(); ?>
+
+            </div>
+        </div>
+    </div>
 </div>

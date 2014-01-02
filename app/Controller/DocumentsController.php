@@ -15,6 +15,12 @@ class DocumentsController extends AppController {
  */
 	public $components = array('Paginator');
 
+    public function beforeFilter(){
+        parent::beforeFilter();
+        if(isset($this->params['prefix']) && $this->params['prefix'] == 'admin'){
+            $this->set('head_title','Quản lý văn bản');
+        }
+    }
 /**
  * index method
  *
@@ -101,7 +107,7 @@ class DocumentsController extends AppController {
 		if (!$this->Document->exists()) {
 			throw new NotFoundException(__('Invalid document'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Document->delete()) {
 			$this->Session->setFlash(__('The document has been deleted.'));
 		} else {
@@ -142,17 +148,42 @@ class DocumentsController extends AppController {
  */
 	public function admin_add() {
 		if ($this->request->is('post')) {
-			$this->Document->create();
-			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved.'));
+            //begin upload file
+            $fileupload = $this->_uploadFiles('documents', $this->request->data['Document']['file_upload']);
+            if(array_key_exists('urls', $fileupload)) {
+                // save the url in the form data
+                $this->request->data['Document']['document_file'] = $fileupload['urls'][0];
+            }
+
+            //end upload file
+
+            $_data = $this->request->data;
+
+
+            //Set create at for document
+            $_data['Document']['docment_created'] = date('Y-m-d');
+
+			if ($this->Document->save($_data)) {
+				$this->Session->setFlash(__('The document has been saved.'),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		}
-		$doctypes = $this->Document->Doctype->find('list');
-		$organs = $this->Document->Organ->find('list');
-		$cats = $this->Document->Cat->find('list');
+		$doctypes = $this->Document->Doctype->find('list',array(
+            'fields' => array('Doctype.doctype_id','Doctype.doctype_name'),
+            'conditions' => array('Doctype.doctype_status',1)
+        ));
+		$organs = $this->Document->Organ->find('list',array(
+            'fields' => array('Organ.organ_id','Organ.organ_name'),
+            'conditions' => array('Organ.organ_status',1)
+        ));
+		$cats = $this->Document->Cat->find('list',array(
+            'fields' => array('Cat.cat_id','Cat.cat_name'),
+            'conditions' => array('Cat.cat_status',1)
+        ));
 		$this->set(compact('doctypes', 'organs', 'cats'));
 	}
 
@@ -167,20 +198,33 @@ class DocumentsController extends AppController {
 		if (!$this->Document->exists($id)) {
 			throw new NotFoundException(__('Invalid document'));
 		}
+        $this->Document->id = $id;
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Document->save($this->request->data)) {
-				$this->Session->setFlash(__('The document has been saved.'));
+				$this->Session->setFlash(__('The document has been saved.'),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The document could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('The document could not be saved. Please, try again.'),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
 			$this->request->data = $this->Document->find('first', $options);
+            $this->request->data['Document']['file_upload'] = $this->request->data['Document']['document_file'] ;
 		}
-		$doctypes = $this->Document->Doctype->find('list');
-		$organs = $this->Document->Organ->find('list');
-		$cats = $this->Document->Cat->find('list');
+		$doctypes = $this->Document->Doctype->find('list',array(
+            'fields' => array('Doctype.doctype_id','Doctype.doctype_name'),
+            'conditions' => array('Doctype.doctype_status',1)
+        ));
+		$organs = $this->Document->Organ->find('list',array(
+            'fields' => array('Organ.organ_id','Organ.organ_name'),
+            'conditions' => array('Organ.organ_status',1)
+        ));
+		$cats = $this->Document->Cat->find('list',array(
+            'fields' => array('Cat.cat_id','Cat.cat_name'),
+            'conditions' => array('Cat.cat_status',1)
+        ));
 		$this->set(compact('doctypes', 'organs', 'cats'));
 	}
 
