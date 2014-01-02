@@ -109,6 +109,7 @@ class ModulesController extends AppController {
  */
 	public function admin_index() {
 		$this->Module->recursive = 0;
+        $this->Paginator->settings = array('limit'=>10);
 		$this->set('modules', $this->Paginator->paginate());
 	}
 
@@ -180,7 +181,7 @@ class ModulesController extends AppController {
 		if (!$this->Module->exists()) {
 			throw new NotFoundException(__('Invalid module'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Module->delete()) {
 			$this->Session->setFlash(__('Module đã được xóa.'));
 		} else {

@@ -109,6 +109,7 @@ class OrgansController extends AppController {
  */
 	public function admin_index() {
 		$this->Organ->recursive = 0;
+        $this->Paginator->settings = array('limit'=>10);
 		$this->set('organs', $this->Paginator->paginate());
 	}
 
@@ -180,7 +181,7 @@ class OrgansController extends AppController {
 		if (!$this->Organ->exists()) {
 			throw new NotFoundException(__('Invalid organ'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Organ->delete()) {
 			$this->Session->setFlash(__('Cơ quan đã được xóa.'));
 		} else {

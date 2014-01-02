@@ -109,6 +109,7 @@ class DoctypesController extends AppController {
  */
 	public function admin_index() {
 		$this->Doctype->recursive = 0;
+        $this->Paginator->settings = array('limit'=>10);
 		$this->set('doctypes', $this->Paginator->paginate());
 	}
 
@@ -180,7 +181,7 @@ class DoctypesController extends AppController {
 		if (!$this->Doctype->exists()) {
 			throw new NotFoundException(__('Invalid doctype'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Doctype->delete()) {
 			$this->Session->setFlash(__('The doctype has been deleted.'));
 		} else {

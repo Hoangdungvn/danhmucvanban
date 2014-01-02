@@ -182,7 +182,7 @@ class CatsController extends AppController {
 		if (!$this->Cat->exists()) {
 			throw new NotFoundException(__('Invalid cat'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Cat->delete()) {
 			$this->Session->setFlash(__('Lĩnh vực đã được xóa.'));
 		} else {

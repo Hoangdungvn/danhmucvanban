@@ -3024,3 +3024,16 @@ button::-moz-focus-inner {
 .error-message{
     color: red;
 }
+
+.dataTables_filter .btn-add {
+    margin-top: 4px;
+}
+
+#datatable_length select.form-control{
+   width: auto;
+   display: inline-block;
+}
+
+.table-documents th a{
+    color: #fff;
+}
