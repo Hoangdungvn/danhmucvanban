@@ -123,7 +123,8 @@ class DocumentsController extends AppController {
  */
 	public function admin_index() {
 		$this->Document->recursive = 0;
-		$this->set('documents', $this->Paginator->paginate());
+
+        $this->set('documents', $this->Paginator->paginate());
 	}
 
 /**

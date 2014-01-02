@@ -4,10 +4,17 @@
 		<legend><?php echo __('Admin Edit Doctype'); ?></legend>
 	<?php
 		echo $this->Form->input('doctype_id');
-		echo $this->Form->input('doctype_name');
-		echo $this->Form->input('doctype_desc');
-		echo $this->Form->input('doctype_status');
-		echo $this->Form->input('doctype_order');
+        echo $this->Form->input('doctype_name',array('label' => 'Tên loại văn bản'));
+        echo $this->Form->input(
+            'doctype_desc',
+            array('type' => 'textarea', 'escape' => false,'class'=>'ckeditor',"label"=>"Mô tả")
+        );
+        echo $this->Form->input('doctype_status', array(
+            'options' => array("0" => "Ẩn" ,"1" =>"Hiển thị"),
+            'default' => '1',
+            'label' =>'Trạng thái'
+        ));
+        echo $this->Form->input('doctype_order',array('label' => 'Thứ tự sắp xếp'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

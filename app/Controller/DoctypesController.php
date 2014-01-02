@@ -49,10 +49,10 @@ class DoctypesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Doctype->create();
 			if ($this->Doctype->save($this->request->data)) {
-				$this->Session->setFlash(__('The doctype has been saved.'));
+				$this->Session->setFlash(__('Loại văn bản đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The doctype could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Loại văn bản chưa được lưu. Xin hãy thử lại.'));
 			}
 		}
 	}
@@ -70,10 +70,10 @@ class DoctypesController extends AppController {
 		}
 		if ($this->request->is(array('post', 'put'))) {
 			if ($this->Doctype->save($this->request->data)) {
-				$this->Session->setFlash(__('The doctype has been saved.'));
+				$this->Session->setFlash(__('Loại văn bản đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The doctype could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Loại văn bản chưa được lưu. Xin hãy thử lại.'));
 			}
 		} else {
 			$options = array('conditions' => array('Doctype.' . $this->Doctype->primaryKey => $id));
@@ -95,9 +95,9 @@ class DoctypesController extends AppController {
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Doctype->delete()) {
-			$this->Session->setFlash(__('The doctype has been deleted.'));
+			$this->Session->setFlash(__('Loại văn bản đã được xóa.'));
 		} else {
-			$this->Session->setFlash(__('The doctype could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Loại văn bản chưa được xóa. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
@@ -136,10 +136,10 @@ class DoctypesController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Doctype->create();
 			if ($this->Doctype->save($this->request->data)) {
-				$this->Session->setFlash(__('The doctype has been saved.'));
+				$this->Session->setFlash(__('Loại văn bản đã được lưu.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The doctype could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Loại văn bản chưa được lưu. Xin hãy thử lại.'));
 			}
 		}
 	}

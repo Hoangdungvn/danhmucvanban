@@ -4,13 +4,20 @@
 		<legend><?php echo __('Admin Edit Organ'); ?></legend>
 	<?php
 		echo $this->Form->input('organ_id');
-		echo $this->Form->input('organ_name');
-		echo $this->Form->input('organ_desc');
-		echo $this->Form->input('organ_status');
-		echo $this->Form->input('organ_order');
+        echo $this->Form->input('organ_name',array('label'=>'Tên cơ quan'));
+        echo $this->Form->input(
+            'organ_desc',
+            array('type' => 'textarea', 'escape' => false,'class'=>'ckeditor',"label"=>"Mô tả")
+        );
+        echo $this->Form->input('organ_status', array(
+            'options' => array("0" => "Ẩn" ,"1" =>"Hiển thị"),
+            'default' => '1',
+            'label' =>'Trạng thái'
+        ));
+        echo $this->Form->input('organ_order',array('label'=>'Thứ tự sắp xếp'));
 	?>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+<?php echo $this->Form->end(__('Sửa')); ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

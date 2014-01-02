@@ -57,6 +57,7 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
     echo $this->Html->script('bootstrap/dist/js/bootstrap.min.js');
     echo $this->Html->script('bootstrap/dist/js/bootstrap.min.js');
     echo $this->Html->script('bootstrap/dist/js/bootstrap.min.js');
+    echo $this->Html->script('ckeditor/ckeditor');
         /*End Add js*/
 
         echo $this->Html->script('ckeditor/ckeditor.js');
