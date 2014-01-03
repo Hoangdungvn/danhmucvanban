@@ -169,6 +169,19 @@ class DoctypesController extends AppController {
 		}
 	}
 
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+            $conditions = array("or"=>array("Doctype.doctype_name Like " => "%$name%","Doctype.doctype_desc Like "=>"%$name%"));
+            $result = $this->Doctype->find('all', array('conditions'=> $conditions));
+            $this->set(array('doctypes'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('doctypes'=> null,"text_search"=>null));
+        }
+
+    }
+
 /**
  * admin_delete method
  *
@@ -189,3 +202,5 @@ class DoctypesController extends AppController {
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}
+
+

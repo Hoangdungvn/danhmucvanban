@@ -146,6 +146,19 @@ class CatsController extends AppController {
 		}
 	}
 
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+            $conditions = array("or"=>array("Cat.cat_name Like " => "%$name%","Cat.cat_desc Like "=>"%$name%"));
+            $result = $this->Cat->find('all', array('conditions'=> $conditions));
+            $this->set(array('cats'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('cats'=> null,"text_search" => null));
+        }
+
+    }
+
 /**
  * admin_edit method
  *

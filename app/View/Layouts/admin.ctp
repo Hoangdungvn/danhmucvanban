@@ -96,5 +96,6 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
             </div>
             <?php endif;?>
         </div>
+    <?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

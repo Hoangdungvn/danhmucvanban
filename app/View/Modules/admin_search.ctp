@@ -1,12 +1,12 @@
 <div class="tblmodules index">
-	<h2><?php echo __('Quản lý Modules'); ?></h2>
+	<h2><?php echo __('Modules'); ?></h2>
     <div class="row">
         <div class="col-sm-12"><div class="pull-right">
             <div class="dataTables_filter" id="datatable_filter">
                 <?php echo $this->Html->link(__('Thêm'), array('action' => 'add'), array("class"=>"btn btn-primary btn-add")); ?>
                 <div class="input-group">
                     <form method="post" action="<?php echo $this->webroot.'admin/modules/search';?>" id="form-search-modules">
-                        <input type="text" placeholder="Tìm kiếm tên, mô tả" class="form-control" name="text_search">
+                        <input type="text" placeholder="Tìm kiếm tên, mô tả" class="form-control" name="text_search" value="<?php echo $text_search;?>">
                         <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                         </span>
@@ -24,11 +24,12 @@
     </div>
 	<table cellpadding="0" cellspacing="0" class="table table-bordered table-documents">
 	<tr style="background: #e7e7e7;">
-			<th><?php echo $this->Paginator->sort('module_id',"Mã module"); ?></th>
-			<th><?php echo $this->Paginator->sort('module_name','Tên module'); ?></th>
-			<th><?php echo $this->Paginator->sort('module_desc', "Mô tả"); ?></th>
+			<th><?php echo "Mã module"; ?></th>
+			<th><?php echo 'Tên module'; ?></th>
+			<th><?php echo "Mô tả"; ?></th>
 			<th class="actions" width="115px"><?php echo __('Chức năng'); ?></th>
 	</tr>
+    <?php if($modules):?>
 	<?php foreach ($modules as $tblmodule): ?>
 	<tr>
 		<td><?php echo h($tblmodule['Module']['module_id']); ?>&nbsp;</td>
@@ -40,22 +41,11 @@
 
 		</td>
 	</tr>
-<?php endforeach; ?>
+        <?php endforeach; ?>
+    <?php else:?>
+        <tr><td colspan="7">Không thấy kết quả tìm kiếm</td></tr>
+        <?php endif;?>
+
 	</table>
-	<p>
-	<?php
-        echo $this->Paginator->counter(array(
-            'format' => __('Trang {:page}/{:pages}, Hiển thị {:current} bản ghi trên tổng số{:count}, Bắt đầu từ bản ghi {:start}, đến {:end}')
-        ));
-	?>	</p>
-	<div class="paging">
-	<?php
-        if($this->Paginator->numbers(array('separator' => ''))){
-            echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-            echo $this->Paginator->numbers(array('separator' => ''));
-            echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-        }
-	?>
-	</div>
 </div>
 

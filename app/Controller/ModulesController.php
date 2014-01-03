@@ -152,6 +152,19 @@ class ModulesController extends AppController {
  * @param string $id
  * @return void
  */
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+            $conditions = array("or"=>array("Module.module_name Like " => "%$name%","Module.module_desc Like "=>"%$name%"));
+            $result = $this->Module->find('all', array('conditions'=> $conditions));
+            $this->set(array('modules'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('modules'=> null,"text_search" => null));
+        }
+
+    }
+
 	public function admin_edit($id = null) {
 		if (!$this->Module->exists($id)) {
 			throw new NotFoundException(__('Invalid module'));

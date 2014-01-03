@@ -15,7 +15,7 @@
                                         <?php echo $this->Html->link(__('Thêm'), array('action' => 'add'), array("class"=>"btn btn-primary btn-add")); ?>
                                         <div class="input-group">
                                             <form method="post" action="<?php echo $this->webroot.'admin/doctypes/search';?>" id="doctypesSearchForm">
-                                                <input type="text" placeholder="Tìm kiếm tên, mô tả, người ký" class="form-control" name="text_search">
+                                                <input type="text" placeholder="Tìm kiếm tên, mô tả, người ký" class="form-control" name="text_search" value="<?php echo $text_search;?>">
                                                 <span class="input-group-btn">
                                                 <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                                 </span>
@@ -70,6 +70,7 @@
                             </thead>
 
                             <tbody role="alert" aria-live="polite" aria-relevant="all">
+                            <?php if($documents):?>
                             <?php $i=0; foreach ($documents as $document): $i++?>
                                 <tr class="gradeA <?php if($i %2 == 0){echo 'even'; }else{echo 'old';} ?>">
                                     <td class=" sorting_1"><?php echo h($document['Document']['docment_id']) ?></td>
@@ -83,6 +84,12 @@
                                     </td>
                                 </tr>
                             <?php endforeach;?>
+                            <?php else:?>
+                                <tr>
+                                    <td colspan="10">Không tìm thấy kết quả tìm kiếm</td>
+                                </tr>
+                            <?php endif;?>
+
                             </tbody>
                         </table>
                         <div class="row">

@@ -127,6 +127,23 @@ class DocumentsController extends AppController {
         $this->set('documents', $this->Paginator->paginate());
 	}
 
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+            $conditions = array("or"=>array(
+                "Document.document_name Like " => "%$name%",
+                "Document.document_desc Like "=>"%$name%",
+                "Document.document_signer Like"=>"%$name%"
+            ));
+            $result = $this->Document->find('all', array('conditions'=> $conditions));
+            $this->set(array('documents'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('documents'=> null,"text_search" => null));
+        }
+
+    }
+
 /**
  * admin_view method
  *

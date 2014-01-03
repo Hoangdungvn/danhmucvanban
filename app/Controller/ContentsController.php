@@ -176,6 +176,19 @@ class ContentsController extends AppController {
  * @param string $id
  * @return void
  */
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+            $conditions = array("or"=>array("Content.content_name Like " => "%$name%","Content.content_desc Like "=>"%$name%"));
+            $result = $this->Content->find('all', array('conditions'=> $conditions));
+            $this->set(array('contents'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('contents'=> null,"text_search" => null));
+        }
+
+    }
+
 	public function admin_delete($id = null) {
 		$this->Content->id = $id;
 		if (!$this->Content->exists()) {

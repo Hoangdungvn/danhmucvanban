@@ -3037,3 +3037,24 @@ button::-moz-focus-inner {
 .table-documents th a{
     color: #fff;
 }
+
+.pull-right #datatable_filter{
+    position: relative;
+}
+
+.pull-right #datatable_filter .btn-add{
+    position: absolute;
+    right: 310px;
+    top:-4px;
+}
+.pull-right #datatable_filter .input-group{
+    position: absolute;
+    width: 300px;
+    right: 0px;
+}
+
+.input-group .input-group-btn {
+    right: 74px;
+    top: 0px;
+    position: absolute;
+}

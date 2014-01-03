@@ -113,6 +113,20 @@ class OrgansController extends AppController {
 		$this->set('organs', $this->Paginator->paginate());
 	}
 
+    public function admin_search() {
+        if (!empty($this->data))
+        {
+            $name = $this->request->data['text_search'];
+             $conditions = array("or"=>array("Organ.organ_name Like " => "%$name%","Organ.organ_desc Like "=>"%$name%"));
+            $result = $this->Organ->find('all', array('conditions'=> $conditions));
+            $this->set(array('organs'=> $result,"text_search"=>$name));
+        }else{
+            $this->set(array('organs'=> null,"text_search"=>null));
+        }
+
+    }
+
+
 /**
  * admin_view method
  *

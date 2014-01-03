@@ -19,6 +19,7 @@ class Organ extends AppModel {
  * @var string
  */
 	public $primaryKey = 'organ_id';
+//    var $actsAs = array ('Searchable');
 
 /**
  * Validation rules

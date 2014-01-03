@@ -1,12 +1,12 @@
 <div class="doctypes index">
-	<h2><?php echo __('Quản lý loại văn bản'); ?></h2>
+	<h2><?php echo __('Doctypes'); ?></h2>
     <div class="row">
         <div class="col-sm-12"><div class="pull-right">
             <div class="dataTables_filter" id="datatable_filter">
                 <?php echo $this->Html->link(__('Thêm'), array('action' => 'add'), array("class"=>"btn btn-primary btn-add")); ?>
                 <div class="input-group">
                     <form method="post" action="<?php echo $this->webroot.'admin/doctypes/search';?>" id="doctypesSearchForm">
-                        <input type="text" placeholder="Tìm kiếm tên, mô tả" class="form-control" name="text_search">
+                        <input type="text" placeholder="Tìm kiếm tên, mô tả" class="form-control" name="text_search" value="<?php echo $text_search;?>">
                         <span class="input-group-btn">
                         <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                         </span>
@@ -24,13 +24,14 @@
     </div>
 	<table cellpadding="0" cellspacing="0" class="table table-bordered table-documents">
 	<tr style="background: #e7e7e7;">
-			<th><?php echo $this->Paginator->sort('doctype_id','Mã loại văn bản'); ?></th>
-			<th><?php echo $this->Paginator->sort('doctype_name','Tên loại văn bản'); ?></th>
-			<th><?php echo $this->Paginator->sort('doctype_desc',"Mô tả"); ?></th>
-			<th><?php echo $this->Paginator->sort('doctype_status',"Trạng thái"); ?></th>
-			<th><?php echo $this->Paginator->sort('doctype_order', "Sắp xếp"); ?></th>
+			<th><?php 'Mã loại văn bản' ?></th>
+			<th><?php 'Tên loại văn bản' ?></th>
+			<th><?php "Mô tả" ?></th>
+			<th><?php "Trạng thái" ?></th>
+			<th><?php "Sắp xếp" ?></th>
 			<th class="actions" width="115px"><?php echo __('Chức năng'); ?></th>
 	</tr>
+    <?php if($doctypes):?>
 	<?php foreach ($doctypes as $doctype): ?>
 	<tr>
 		<td><?php echo h($doctype['Doctype']['doctype_id']); ?>&nbsp;</td>
@@ -45,21 +46,11 @@
 		</td>
 	</tr>
 <?php endforeach; ?>
+    <?php else:?>
+        <tr>
+            <td colspan="7">Không tìm thấy kết quả</td>
+        </tr>
+    <?php endif;?>
 	</table>
-	<p>
-	<?php
-        echo $this->Paginator->counter(array(
-            'format' => __('Trang {:page}/{:pages}, Hiển thị {:current} bản ghi trên tổng số{:count}, Bắt đầu từ bản ghi {:start}, đến {:end}')
-        ));
-	?>	</p>
-	<div class="paging">
-	<?php
-        if($this->Paginator->numbers(array('separator' => ''))){
-            echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
-            echo $this->Paginator->numbers(array('separator' => ''));
-            echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
-        }
 
-	?>
-	</div>
 </div>

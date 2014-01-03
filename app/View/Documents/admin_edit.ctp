@@ -1,5 +1,10 @@
 
 <?php echo $this->Html->addCrumb('Sửa văn bản') ?>
+<?php
+    $file = $this->request->data['Document']['document_file'];
+    $explode_name = explode("/",$file);
+    $_filename = $explode_name[1];
+?>
 <div class="row">
     <div class="col-sm-12 col-md-12">
         <div class="block-flat">
@@ -80,6 +85,8 @@
                     'type' => 'file',
                     'label' => 'File Đính Kèm'
                 ));
+
+                echo $this->Html->link($_filename,$this->webroot.'document'.$_filename);
 
                 echo $this->Form->input('document_status',array(
                     'label' => 'Trạng Thái <em>*</em>',
