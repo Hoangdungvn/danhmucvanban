@@ -1,233 +1,159 @@
-<?php
-/**
- *
- *
- * @link          http://cakephp.org CakePHP(tm) Project
- * @package       app.View.Pages
- * @since         CakePHP(tm) v 0.10.0.1076
- */
 
-if (!Configure::read('debug')):
-	throw new NotFoundException();
-endif;
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tbody>
+    <tr>
+        <td id="MSOZoneCell_WebPartctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482" valign="top">
+            <table toplevel="" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                <tr>
+                    <td valign="top">
+                        <div webpartid="fcba945a-caa5-4983-b6d0-ab183ccd1482" haspers="false"
+                             id="WebPartctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482" width="100%"
+                             class="ms-WPBody" allowdelete="false" allowexport="false" style="">
+                            <div id="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482">
+                                <div class="box_search_nghiep_vu"><p class="red">TÌM KIẾM</p>
 
-App::uses('Debugger', 'Utility');
-?>
-<h2><?php echo __d('cake_dev', 'Release Notes for CakePHP %s.', Configure::version()); ?></h2>
-<p>
-	<a href="http://cakephp.org/changelogs/<?php echo Configure::version(); ?>"><?php echo __d('cake_dev', 'Read the changelog'); ?> </a>
-</p>
-<?php
-if (Configure::read('debug') > 0):
-	Debugger::checkSecurityKeys();
-endif;
-?>
-<?php
-if (file_exists(WWW_ROOT . 'css' . DS . 'cake.generic.css')):
-?>
-<p id="url-rewriting-warning" style="background-color:#e32; color:#fff;">
-	<?php echo __d('cake_dev', 'URL rewriting is not properly configured on your server.'); ?>
-	1) <a target="_blank" href="http://book.cakephp.org/2.0/en/installation/url-rewriting.html" style="color:#fff;">Help me configure it</a>
-	2) <a target="_blank" href="http://book.cakephp.org/2.0/en/development/configuration.html#cakephp-core-configuration" style="color:#fff;">I don't / can't use URL rewriting</a>
-</p>
-<?php
-endif;
-?>
-<p>
-<?php
-	if (version_compare(PHP_VERSION, '5.2.8', '>=')):
-		echo '<span class="notice success">';
-			echo __d('cake_dev', 'Your version of PHP is 5.2.8 or higher.');
-		echo '</span>';
-	else:
-		echo '<span class="notice">';
-			echo __d('cake_dev', 'Your version of PHP is too low. You need PHP 5.2.8 or higher to use CakePHP.');
-		echo '</span>';
-	endif;
-?>
-</p>
-<p>
-	<?php
-		if (is_writable(TMP)):
-			echo '<span class="notice success">';
-				echo __d('cake_dev', 'Your tmp directory is writable.');
-			echo '</span>';
-		else:
-			echo '<span class="notice">';
-				echo __d('cake_dev', 'Your tmp directory is NOT writable.');
-			echo '</span>';
-		endif;
-	?>
-</p>
-<p>
-	<?php
-		$settings = Cache::settings();
-		if (!empty($settings)):
-			echo '<span class="notice success">';
-				echo __d('cake_dev', 'The %s is being used for core caching. To change the config edit %s', '<em>'. $settings['engine'] . 'Engine</em>', 'APP/Config/core.php');
-			echo '</span>';
-		else:
-			echo '<span class="notice">';
-				echo __d('cake_dev', 'Your cache is NOT working. Please check the settings in %s', 'APP/Config/core.php');
-			echo '</span>';
-		endif;
-	?>
-</p>
-<p>
-	<?php
-		$filePresent = null;
-		if (file_exists(APP . 'Config' . DS . 'database.php')):
-			echo '<span class="notice success">';
-				echo __d('cake_dev', 'Your database configuration file is present.');
-				$filePresent = true;
-			echo '</span>';
-		else:
-			echo '<span class="notice">';
-				echo __d('cake_dev', 'Your database configuration file is NOT present.');
-				echo '<br/>';
-				echo __d('cake_dev', 'Rename %s to %s', 'APP/Config/database.php.default', 'APP/Config/database.php');
-			echo '</span>';
-		endif;
-	?>
-</p>
-<?php
-if (isset($filePresent)):
-	App::uses('ConnectionManager', 'Model');
-	try {
-		$connected = ConnectionManager::getDataSource('default');
-	} catch (Exception $connectionError) {
-		$connected = false;
-		$errorMsg = $connectionError->getMessage();
-		if (method_exists($connectionError, 'getAttributes')):
-			$attributes = $connectionError->getAttributes();
-			if (isset($errorMsg['message'])):
-				$errorMsg .= '<br />' . $attributes['message'];
-			endif;
-		endif;
-	}
-?>
-<p>
-	<?php
-		if ($connected && $connected->isConnected()):
-			echo '<span class="notice success">';
-				echo __d('cake_dev', 'CakePHP is able to connect to the database.');
-			echo '</span>';
-		else:
-			echo '<span class="notice">';
-				echo __d('cake_dev', 'CakePHP is NOT able to connect to the database.');
-				echo '<br /><br />';
-				echo $errorMsg;
-			echo '</span>';
-		endif;
-	?>
-</p>
-<?php endif; ?>
-<?php
-	App::uses('Validation', 'Utility');
-	if (!Validation::alphaNumeric('cakephp')):
-		echo '<p><span class="notice">';
-			echo __d('cake_dev', 'PCRE has not been compiled with Unicode support.');
-			echo '<br/>';
-			echo __d('cake_dev', 'Recompile PCRE with Unicode support by adding <code>--enable-unicode-properties</code> when configuring');
-		echo '</span></p>';
-	endif;
-?>
+                                    <div class="box_nghiep_vu">
+                                        <div class="nghiep_vu">
+                                            <div class="text_left">Từ Khóa</div>
+                                            <div class="input_text"><input
+                                                    name="ctl00$WebPartManager$g_fcba945a_caa5_4983_b6d0_ab183ccd1482$ctl00"
+                                                    type="text"
+                                                    id="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_ctl00"
+                                                    class="long" onkeydown="return TxtSearchKeyDown(event);"></div>
+                                            <div class="nghiep_vu">
+                                                <div class="text_left"></div>
+                                                <div class="input_text"><input
+                                                        id="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_rdSokyhieu"
+                                                        type="radio"
+                                                        name="ctl00$WebPartManager$g_fcba945a_caa5_4983_b6d0_ab183ccd1482$search"
+                                                        value="rdSokyhieu" checked="checked"><label
+                                                        for="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_rdSokyhieu">Số
+                                                        ký hiệu, trích yếu</label>&nbsp;&nbsp;<input
+                                                        id="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_rdToanvan"
+                                                        type="radio"
+                                                        name="ctl00$WebPartManager$g_fcba945a_caa5_4983_b6d0_ab183ccd1482$search"
+                                                        value="rdToanvan"><label
+                                                        for="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_rdToanvan">Toàn
+                                                        văn</label></div>
+                                            </div>
+                                            <div class="nghiep_vu">
+                                                <div class="text_left"></div>
+                                                <div class="input_text" style="padding:5px 0"><a
+                                                        id="ctl00_WebPartManager_g_fcba945a_caa5_4983_b6d0_ab183ccd1482_SeachLink"
+                                                        href='javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions("ctl00$WebPartManager$g_fcba945a_caa5_4983_b6d0_ab183ccd1482$SeachLink", "", true, "", "", false, true))'><img
+                                                            border="0"
+                                                            src="/img/search_quetion.gif"></a><span><a
+                                                            href="#">Tìm kiếm nâng cao</a></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <div class="ms-PartSpacingVertical"></div>
+        </td>
+    </tr>
+    <tr>
+        <td id="MSOZoneCell_WebPartctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3" valign="top">
+            <table toplevel="" border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                <tr>
+                    <td valign="top">
+                        <div webpartid="008e2ddf-5150-40c5-bbac-6ad994c9f9c3" haspers="false"
+                             id="WebPartctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3" width="100%"
+                             class="ms-WPBody" allowdelete="false" allowexport="false" style="">
+                            <div id="ctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3">
 
-<p>
-	<?php
-		if (CakePlugin::loaded('DebugKit')):
-			echo '<span class="notice success">';
-				echo __d('cake_dev', 'DebugKit plugin is present');
-			echo '</span>';
-		else:
-			echo '<span class="notice">';
-				echo __d('cake_dev', 'DebugKit is not installed. It will help you inspect and debug different aspects of your application.');
-				echo '<br/>';
-				echo __d('cake_dev', 'You can install it from %s', $this->Html->link('GitHub', 'https://github.com/cakephp/debug_kit'));
-			echo '</span>';
-		endif;
-	?>
-</p>
+                                <!-- <link type="text/css" rel="stylesheet" href="/PublishingImages/style/datagrid.css"/> -->
+                                <style type="text/css">
+                                    .style33 {
+                                        padding-top: 2px;
+                                        font-size: 0.9em;
 
-<h3><?php echo __d('cake_dev', 'Editing this Page'); ?></h3>
-<p>
-<?php
-echo __d('cake_dev', 'To change the content of this page, edit: %s.<br />
-To change its layout, edit: %s.<br />
-You can also add some CSS styles for your pages at: %s.',
-	'APP/View/Pages/home.ctp', 'APP/View/Layouts/default.ctp', 'APP/webroot/css');
-?>
-</p>
+                                        text-align: left;
+                                        width: 55px;
+                                        float: left;
+                                    }
 
-<h3><?php echo __d('cake_dev', 'Getting Started'); ?></h3>
-<p>
-	<?php
-		echo $this->Html->link(
-			sprintf('<strong>%s</strong> %s', __d('cake_dev', 'New'), __d('cake_dev', 'CakePHP 2.0 Docs')),
-			'http://book.cakephp.org/2.0/en/',
-			array('target' => '_blank', 'escape' => false)
-		);
-	?>
-</p>
-<p>
-	<?php
-		echo $this->Html->link(
-			__d('cake_dev', 'The 15 min Blog Tutorial'),
-			'http://book.cakephp.org/2.0/en/tutorials-and-examples/blog/blog.html',
-			array('target' => '_blank', 'escape' => false)
-		);
-	?>
-</p>
+                                    .style44 {
+                                        padding-top: 2px;
+                                        font-size: 0.9em;
 
-<h3><?php echo __d('cake_dev', 'Official Plugins'); ?></h3>
-<p>
-<ul>
-	<li>
-		<?php echo $this->Html->link('DebugKit', 'https://github.com/cakephp/debug_kit') ?>:
-		<?php echo __d('cake_dev', 'provides a debugging toolbar and enhanced debugging tools for CakePHP applications.'); ?>
-	</li>
-	<li>
-		<?php echo $this->Html->link('Localized', 'https://github.com/cakephp/localized') ?>:
-		<?php echo __d('cake_dev', 'contains various localized validation classes and translations for specific countries'); ?>
-	</li>
-</ul>
-</p>
+                                        text-align: left;
+                                        width: 85px;
+                                        float: left;
+                                    }
 
-<h3><?php echo __d('cake_dev', 'More about CakePHP'); ?></h3>
-<p>
-<?php echo __d('cake_dev', 'CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC.'); ?>
-</p>
-<p>
-<?php echo __d('cake_dev', 'Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.'); ?>
-</p>
+                                    .cl1 {
+                                        color: #0F8E0F;
+                                    }
 
-<ul>
-	<li><a href="http://cakephp.org">CakePHP</a>
-	<ul><li><?php echo __d('cake_dev', 'The Rapid Development Framework'); ?></li></ul></li>
-	<li><a href="http://book.cakephp.org"><?php echo __d('cake_dev', 'CakePHP Documentation'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Your Rapid Development Cookbook'); ?></li></ul></li>
-	<li><a href="http://api.cakephp.org"><?php echo __d('cake_dev', 'CakePHP API'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Quick API Reference'); ?></li></ul></li>
-	<li><a href="http://bakery.cakephp.org"><?php echo __d('cake_dev', 'The Bakery'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Everything CakePHP'); ?></li></ul></li>
-	<li><a href="http://plugins.cakephp.org"><?php echo __d('cake_dev', 'CakePHP Plugins'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'A comprehensive list of all CakePHP plugins created by the community'); ?></li></ul></li>
-	<li><a href="http://community.cakephp.org"><?php echo __d('cake_dev', 'CakePHP Community Center'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Everything related to the CakePHP community in one place'); ?></li></ul></li>
-	<li><a href="https://groups.google.com/group/cake-php"><?php echo __d('cake_dev', 'CakePHP Google Group'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Community mailing list'); ?></li></ul></li>
-	<li><a href="irc://irc.freenode.net/cakephp">irc.freenode.net #cakephp</a>
-	<ul><li><?php echo __d('cake_dev', 'Live chat about CakePHP'); ?></li></ul></li>
-	<li><a href="https://github.com/cakephp/"><?php echo __d('cake_dev', 'CakePHP Code'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Find the CakePHP code on GitHub and contribute to the framework'); ?></li></ul></li>
-	<li><a href="https://github.com/cakephp/cakephp/issues"><?php echo __d('cake_dev', 'CakePHP Issues'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'CakePHP Issues'); ?></li></ul></li>
-	<li><a href="https://github.com/cakephp/cakephp/wiki#roadmaps"><?php echo __d('cake_dev', 'CakePHP Roadmaps'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'CakePHP Roadmaps'); ?></li></ul></li>
-	<li><a href="http://training.cakephp.org"><?php echo __d('cake_dev', 'Training'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Join a live session and get skilled with the framework'); ?></li></ul></li>
-	<li><a href="http://cakefest.org"><?php echo __d('cake_dev', 'CakeFest'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Don\'t miss our annual CakePHP conference'); ?></li></ul></li>
-	<li><a href="http://cakefoundation.org"><?php echo __d('cake_dev', 'Cake Software Foundation'); ?> </a>
-	<ul><li><?php echo __d('cake_dev', 'Promoting development related to CakePHP'); ?></li></ul></li>
-</ul>
+                                    .cl2 {
+                                        color: #52504E;
+                                    }
+
+                                    .cl3 {
+                                        color: #C61915;
+                                    }
+                                </style>
+                                <script src="/_layouts/huylmfield.js"></script>
+                                <div class="box_search_vb">
+                                    <p class="result">
+                                        <span
+                                            id="ctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3_ctl00_lblNghiepVu"></span>
+                                        <span
+                                            id="ctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3_ctl00_lblTitleOfPage"></span>
+                                    </p>
+                                </div>
+
+                                <div class="box_result_b">
+                                    <div>
+                                        <table class="datagrid" cellspacing="0" border="0"
+                                               id="ctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3_ctl00_grdNewestVB"
+                                               style="border-width:0px;width:100%;border-collapse:collapse;">
+                                            <tbody>
+                                            <tr style="font-weight:bold;">
+                                                <th align="left" scope="col">&nbsp;&nbsp;&nbsp;Văn bản mới</th>
+                                            </tr>
+                                            <?php foreach($new_documents as $_document): ?>
+                                            <tr>
+                                                <td align="left">
+                                                    <p class="name_vb">
+                                                        <?php echo $this->Html->link($_document['Document']['docment_name'],array('controller'=>'documents','action'=>'view',$_document['Document']['docment_id'])); ?>
+                                                    </p>
+
+                                                    <p class="content_vb"><span
+                                                            id="ctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3_ctl00_grdNewestVB_ctl02_lblTrichyeu">Về thanh toán bằng tiền mặt</span>
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="khung_search">
+                                    <div
+                                        id="__gvctl00_WebPartManager_g_008e2ddf_5150_40c5_bbac_6ad994c9f9c3_ctl00_gvTaiLieu__div">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    </tbody>
+</table>

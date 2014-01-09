@@ -67,9 +67,9 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => '',
-		'database' => 'db_document',
+		'database' => 'dbdanhmucvanban',
 		'prefix' => '',
-		'encoding' => 'utf8',
+//		'encoding' => 'utf8',
 	);
     /*
 	public $test = array(

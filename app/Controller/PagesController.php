@@ -74,4 +74,15 @@ class PagesController extends AppController {
 			throw new NotFoundException();
 		}
 	}
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        $_new_documents = ClassRegistry::init('Document')->find('all',array(
+            'conditions' => array('Document.document_status' => 1),
+            'fields' => array('Document.docment_id','Document.docment_name'),
+            'order' => array('Document.document_signdate DESC'),
+            'limit' => 10
+        ));
+        $this->set('new_documents', $_new_documents);
+    }
 }
