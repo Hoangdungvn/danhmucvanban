@@ -37,37 +37,28 @@
 		<td><?php echo h($permission['Module']['module_name']);?>&nbsp;</td>
         <?php
             $perm = explode(",",$permission['Permission']['permission_number']);
-            $mess="";
-            if($perm[0] != ""){
-                $perm[0] = "xem";
-                $perm[1] = "";
-                $perm[2] = "";
-                $perm[3] = "";
+            $txt = "";
+            foreach($perm as $mess){
+                if($mess == 1){
+                    $txt .= "Xem";
+                }
+                else if($mess == 2){
+                    $txt .= " Thêm";
+                }
+                else if($mess == 3){
+                    $txt .= " Sửa";
+                }
+                else if($mess == 4){
+                    $txt .= " Xóa";
+                }else{
+                    $txt .= "";
+                }
             }
-            else if($perm[1] != ""){
-                $perm[0] = "xem";
-                $perm[1] = "Thêm";
-                $perm[2] = "";
-                $perm[3] = "";
-            }else if($perm[2] != ""){
-                $perm[0] = "xem";
-                $perm[2] = "Sửa";
-                $perm[1] = "";
-                $perm[3] = "";
-            }else if($perm[3] != ""){
-                $perm[3] = "Xóa";
-                $perm[0] = "Xem";
-                $perm[1] = "";
-                $perm[2] = "";
-            }else{
-                $mess = "Không có quyền gì cả";
-                $perm[0] = "";
-                $perm[1] = "";
-                $perm[2] = "";
-                $perm[3] = "";
+            if($txt == ""){
+                $txt = "Không có quyền gì";
             }
         ?>
-		<td><?php echo $mess.$perm[0]." ".$perm[1]." ".$perm[2]." ".$perm[3]; ?>&nbsp;</td>
+		<td><?php echo $txt;//$permission['Permission']['permission_number']; ?>&nbsp;</td>
 		<td class="actions">
             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action' => 'edit',$permission['Permission']['permission_id']),array('class'=>'label label-default','escape'=>false)); ?>
             <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('action' => 'delete',$permission['Permission']['permission_id']),array('class'=>'label label-danger','escape'=>false)); ?>

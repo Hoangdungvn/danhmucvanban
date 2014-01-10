@@ -35,6 +35,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
     echo $this->Html->css('datagrid');
     echo $this->Html->css('style-vbpq');
     echo $this->Html->css('style-btp');
+    echo $this->Html->css('bootstrap.css');
 
     echo $this->fetch('meta');
     echo $this->fetch('css');

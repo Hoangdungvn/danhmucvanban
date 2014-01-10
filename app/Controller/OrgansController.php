@@ -13,6 +13,7 @@ class OrgansController extends AppController {
  *
  * @var array
  */
+    public $use = array("Organ","Document");
 	public $components = array('Paginator');
 
 /**
@@ -40,6 +41,15 @@ class OrgansController extends AppController {
 		$this->set('organ', $this->Organ->find('first', $options));
 	}
 
+    public function list_organs($id = null){
+       if (!$this->Organ->exists($id)) {
+			throw new NotFoundException(__('Invalid organ'));
+		}
+       $list = $this->Document->find("all",array(
+               'conditions' => array('Document.organ_id' => $id)
+           ));
+        $this->set('organ', $list);
+    }
 /**
  * add method
  *

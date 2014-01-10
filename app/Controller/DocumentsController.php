@@ -13,6 +13,7 @@ class DocumentsController extends AppController {
  *
  * @var array
  */
+    public $use = array("Document","Organ","Cat","Doctype");
 	public $components = array('Paginator');
 
     public function beforeFilter(){
@@ -45,6 +46,48 @@ class DocumentsController extends AppController {
 		$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
 		$this->set('document', $this->Document->find('first', $options));
 	}
+
+    public function list_organs($id = null){
+        if (!$id) {
+            throw new NotFoundException(__('Invalid organ'));
+        }
+        $list = $this->Document->Find("all",array(
+            'conditions' => array('Document.organ_id' => $id)
+        ));
+        $organ_name = $this->Document->find("first",array("conditions"=>array("Document.organ_id"=>$id)));
+        $this->set(array(
+            "documents"=>$list,
+            "organ_name"=>$organ_name
+        ));
+    }
+
+    public function list_cats($id = null){
+        if (!$id) {
+            throw new NotFoundException(__('Invalid organ'));
+        }
+        $list = $this->Document->Find("all",array(
+            'conditions' => array('Document.cat_id' => $id)
+        ));
+        $cat_name = $this->Document->find("first",array("conditions"=>array("Document.cat_id"=>$id)));
+        $this->set(array(
+            "cats"=>$list,
+            "cat_name"=>$cat_name
+        ));
+    }
+
+    public function list_doctypes($id = null){
+        if (!$id) {
+            throw new NotFoundException(__('Invalid organ'));
+        }
+        $list = $this->Document->Find("all",array(
+            'conditions' => array('Document.doctype_id' => $id)
+        ));
+        $doctype_name = $this->Document->find("first",array("conditions"=>array("Document.doctype_id"=>$id)));
+        $this->set(array(
+            "doctypes"=>$list,
+            "doctype_name"=>$doctype_name
+        ));
+    }
 
 /**
  * add method

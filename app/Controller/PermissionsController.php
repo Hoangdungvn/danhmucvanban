@@ -1,9 +1,9 @@
 <?php
 App::uses('AppController', 'Controller');
 /**
- * Tblpermissions Controller
+ * Permissions Controller
  *
- * @property Tblpermission $Tblpermission
+ * @property Permission $Permission
  * @property PaginatorComponent $Paginator
  */
 class PermissionsController extends AppController {
@@ -34,10 +34,10 @@ class PermissionsController extends AppController {
  */
 	public function admin_view($id = null) {
 		if (!$this->Permission->exists($id)) {
-			throw new NotFoundException(__('Invalid tblpermission'));
+			throw new NotFoundException(__('Invalid Permission'));
 		}
-		$options = array('conditions' => array('Tblpermission.' . $this->Tblpermission->primaryKey => $id));
-		$this->set('tblpermission', $this->Tblpermission->find('first', $options));
+		$options = array('conditions' => array('Permission.' . $this->Permission->primaryKey => $id));
+		$this->set('Permission', $this->Permission->find('first', $options));
 	}
 
 /**
@@ -46,24 +46,35 @@ class PermissionsController extends AppController {
  * @return void
  */
 	public function admin_add() {
+        $users = $this->Permission->User->find('all');
+        $modules = $this->Permission->Module->find('all');
 		if ($this->request->is('post')) {
-            $perm = $this->request->data["permission_view"].",".$this->request->data["permission_add"].",".$this->request->data["permission_update"].",".$this->request->data["permission_delete"];
-            $data = array(
-                'user_id' => $this->request->data["userid"],
-                'module_id' => $this->request->data["moduleid"],
-                "permission_number"=>$perm
-            );
-            $result = $this->Permission->save($data);
-			if ($result) {
-				$this->Session->setFlash(__('The tblpermission has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The tblpermission could not be saved. Please, try again.'));
-			}
+            foreach($modules as $module){
+                $module_id = $module['Module']['module_id'];
+                $delete = "";
+                $view = "";
+                $add = "";
+                $update = "";
+                if(isset($this->request->data["permission_view_$module_id"])){
+                    $view = $this->request->data["permission_view_$module_id"];
+                }
+                if(isset($this->request->data["permission_add_$module_id"])){
+                    $add = $this->request->data["permission_add_$module_id"];
+                }
+                if(isset($this->request->data["permission_update_$module_id"])){
+                    $update = $this->request->data["permission_update_$module_id"];
+                }
+                if(isset($this->request->data["permission_delete_$module_id"])){
+                    $delete = $this->request->data["permission_delete_$module_id"];
+                }
+                $perm = $view.",".$add.",".$update.",".$delete;
+                $user_id = $this->request->data["userid"];
+                $module = $this->request->data["moduleid_$module_id"];
+                $result = $this->Permission->query("INSERT INTO tblpermissions (user_id,module_id,permission_number) VALUE ('".$user_id."' , '".$module."', '".$perm."')");
+
+            }
 		}
-		$users = $this->Permission->User->find('all');
-		$modules = $this->Permission->Module->find('all');
-		$this->set(compact('permissions', 'users', 'modules'));
+		$this->set(compact('users', 'modules'));
 	}
 
 /**
@@ -74,24 +85,29 @@ class PermissionsController extends AppController {
  * @return void
  */
 	public function admin_edit($id = null) {
-		if (!$this->Tblpermission->exists($id)) {
-			throw new NotFoundException(__('Invalid tblpermission'));
+		if (!$this->Permission->exists($id)) {
+			throw new NotFoundException(__('Invalid Permission'));
 		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->Tblpermission->save($this->request->data)) {
-				$this->Session->setFlash(__('The tblpermission has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The tblpermission could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('Tblpermission.' . $this->Tblpermission->primaryKey => $id));
-			$this->request->data = $this->Tblpermission->find('first', $options);
-		}
-		$permissions = $this->Tblpermission->Permission->find('list');
-		$users = $this->Tblpermission->User->find('list');
-		$modules = $this->Tblpermission->Module->find('list');
-		$this->set(compact('permissions', 'users', 'modules'));
+        if ($this->request->is('post')) {
+            $perm = $this->request->data["permission_view"].",".$this->request->data["permission_add"].",".$this->request->data["permission_update"].",".$this->request->data["permission_delete"];
+            $data = array(
+                'user_id' => $this->request->data["userid"],
+                'module_id' => $this->request->data["moduleid"],
+                "permission_number"=>$perm
+            );
+            $this->Permission->id = $id;
+            $result = $this->Permission->save($data);
+            if ($result) {
+                $this->Session->setFlash(__('Quyền hạn đã được sửa'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('Quyền hạn chưa sửa được.Xin hãy thử lại.'));
+            }
+        }
+        $permissions = $this->Permission->Find("first",array('conditions' => array('Permission.' . $this->Permission->primaryKey => $id)));
+        $users = $this->Permission->User->find('all');
+        $modules = $this->Permission->Module->find('all');
+        $this->set(compact('permissions', 'users', 'modules'));
 	}
 
 /**
@@ -102,15 +118,14 @@ class PermissionsController extends AppController {
  * @return void
  */
 	public function admin_delete($id = null) {
-		$this->Tblpermission->id = $id;
-		if (!$this->Tblpermission->exists()) {
-			throw new NotFoundException(__('Invalid tblpermission'));
+		$this->Permission->id = $id;
+		if (!$this->Permission->exists()) {
+			throw new NotFoundException(__('Invalid Permission'));
 		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Tblpermission->delete()) {
-			$this->Session->setFlash(__('The tblpermission has been deleted.'));
+		if ($this->Permission->delete()) {
+			$this->Session->setFlash(__('Quyền hạn đã được xóa'));
 		} else {
-			$this->Session->setFlash(__('The tblpermission could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('Quyền hạn chưa xóa được. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}
