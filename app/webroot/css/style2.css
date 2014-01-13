@@ -1319,7 +1319,7 @@ span.number_click a {
     text-decoration:underline;
     float:left;
     display:block;
-    padding:2px 0 0 3px;
+    padding:10px 0 0 3px;
 }
 .nghiep_vu .input_text a img {float:left; margin-right:5px}
 .box_list_result {
@@ -1631,4 +1631,9 @@ background:#dddddd;*/
     text-transform: uppercase;
     background: url(/img/yellow_green_long.gif) 0 0 no-repeat;
     margin-bottom: 10px;
+}
+
+.btn-document-search{
+    float: left;
+    margin-right: 10px;
 }
