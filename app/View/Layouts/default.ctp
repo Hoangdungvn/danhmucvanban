@@ -37,6 +37,10 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
     echo $this->Html->css('style-btp');
     echo $this->Html->css('bootstrap.css');
 
+    echo $this->Html->script('jquery.js');
+    echo $this->Html->script('jquery.ui/jquery-ui.js');
+    echo $this->Html->script('jquery.fileDownload.js');
+
     echo $this->fetch('meta');
     echo $this->fetch('css');
     echo $this->fetch('script');
@@ -94,7 +98,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                             Cổng thông tin điện tử
                             <!--[if gte IE 7]><!-->
                             </span>
-                                        </a>
+                                    </a>
                                     </li>
 
                                     <li id="Menu_1"><a target="_top" href="/pages/vbpq.aspx">
@@ -102,7 +106,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                             Trang chủ
                             <!--[if gte IE 7]><!-->
                             </span>
-                                        </a>
+                                    </a>
                                     </li>
 
                                     <li id="Menu_6"><a target="_top" href="/vbpq/Pages/ssearch.aspx">
@@ -110,7 +114,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                             Tìm kiếm
                             <!--[if gte IE 7]><!-->
                             </span>
-                                        </a>
+                                    </a>
                                     </li>
 
                                     <li id="Menu_7"><a target="_blank" href="http://vbpl.vn/">
@@ -118,7 +122,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                             CSDLQG về văn bản pháp luật
                             <!--[if gte IE 7]><!-->
                             </span>
-                                        </a>
+                                    </a>
                                     </li>
 
                                     <li id="Menu_4"><a target="_top" href="/vbpq/en">
@@ -126,7 +130,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                             English
                             <!--[if gte IE 7]><!-->
                             </span>
-                                        </a>
+                                    </a>
                                     </li>
 
                                 </ul>
@@ -148,10 +152,10 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
                 <div id="content">
                     <div class="khung">
                         <div class="left">
-                             <?php echo $this->element('left',array('left_menu'=>$left_menu)); ?>
+                            <?php echo $this->element('left', array('left_menu' => $left_menu)); ?>
                         </div>
                         <div class="main">
-                             <?php echo $this->fetch('content') ?>
+                            <?php echo $this->fetch('content') ?>
                         </div>
                     </div>
                 </div>
@@ -161,18 +165,40 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
             <!--Begin Footer-->
             <div id="footer">
                 <div class="footer-c">
-                    <div class="footer-content" style="padding: 6px 15px">
+                    <div class="footer-content" style="padding: 6px 15px;">
+                        <!--
+                        <p class="title" style="padding:0px;margin-top:0px;">CỔNG THÔNG TIN ĐIỆN TỬ BỘ TƯ PHÁP
+                        </p>
+                        -->
+                        <div style="float:left;margin-top:3px;margin-right:80px;color:#035DCF;">
+                            <a href="/"
+                               style="color:white;font-weight:bold;font-style:normal;font-variant:normal;font-family:Verdana, Geneva, sans-serif;">Bộ
+                                Tư pháp </a>&nbsp;&nbsp;&nbsp;<a
+                                style="color:white;font-weight:bold;font-style:normal;font-variant:normal;font-family:Verdana, Geneva, sans-serif;"
+                                href="/pages/contact.aspx">Liên hệ</a>&nbsp;&nbsp;&nbsp;
+                            <a href="/Pages/guiphanhoi.aspx"
+                               style="color:white;font-weight:bold;font-style:normal;font-variant:normal;font-family:Verdana, Geneva, sans-serif;">Phản
+                                hồi</a>
+
+                        </div>
+
                         <div class="info" style="clear:both;text-shadow: 0 0 0 #FFFFFF;">
-                            <p style="border: 0 none;
-                                font: inherit;
-                                margin: 0;
-                                padding: 10px 0 0;
-                                font-size:14px;
-                                font-weight:bold;
-                                vertical-align: baseline;
-                                ">
-                                Tra cứu thông tin văn bản
+                            <p style="border: 0 none;font: inherit;margin: 0;padding: 10px 0 0;font-size:14px;font-weight:bold;vertical-align: baseline;">
+                                CỔNG THÔNG TIN ĐIỆN TỬ BỘ TƯ PHÁP
                             </p>
+
+                            <p style="padding:5px 0px !important;line-height:100% !important;border: 0 none;font: inherit;margin: 0;padding: 0;vertical-align: baseline;"><strong>Địa chỉ:</strong> 60 Trần Phú, Ba Đình, Hà Nội. <strong>Điện thoại:</strong> 04.62739718 -<strong>Fax:</strong> 04.62739359. <strong>Email:</strong> banbientap@moj.gov.vn;cntt@moj.gov.vn.</p>
+
+                            <p style="line-height:100% !important;border: 0 none;font: inherit;margin: 0;padding: 0;vertical-align: baseline;">Giấy phép cung cấp thông tin trên internet số 28/GP-BC ngày 25/03/2005.</p>
+
+                            <p style="line-height:100% !important;border: 0 none;font: inherit;margin: 0;padding: 4px 0px;vertical-align: baseline; ">Trưởng Ban biên tập: Nguyễn Tiến Dũng - Cục trưởng Cục Công nghệ thông tin.</p>
+
+                            <p style="line-height:100% !important;border: 0 none;
+    font: inherit;
+    margin: 0;
+padding: 0px;
+    vertical-align: baseline;
+">Ghi rõ nguồn Cổng thông tin điện tử Bộ Tư pháp (www.moj.gov.vn) khi trích dẫn lại tin từ địa chỉ này. </p>
                         </div>
                     </div>
                 </div>

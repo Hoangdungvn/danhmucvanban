@@ -44,7 +44,37 @@ class DocumentsController extends AppController {
 			throw new NotFoundException(__('Invalid document'));
 		}
 		$options = array('conditions' => array('Document.' . $this->Document->primaryKey => $id));
-		$this->set('document', $this->Document->find('first', $options));
+        $view = $this->Document->find('first', $options);
+        $nexus = null;
+        if(isset($this->request['url']['organ'])){
+            $nexus_id = $this->request['url']['organ'];
+            $nexus = $this->Document->find("all",array(
+                'conditions' => array('Document.organ_id' => $nexus_id,"NOT"=>array("Document.docment_id"=>$id)),
+                'order' => array('Document.docment_created DESC'),
+                'limit' => 10
+            ));
+        }
+        if(isset($this->request['url']['doctype'])){
+            $nexus_id = $this->request['url']['doctype'];
+            $nexus = $this->Document->find("all",array(
+                'conditions' => array('Document.doctype_id' => $nexus_id,"NOT"=>array("Document.docment_id"=>$id)),
+                'order' => array('Document.docment_created DESC'),
+                'limit' => 10
+            ));
+        }
+        if(isset($this->request['url']['cat'])){
+            $nexus_id = $this->request['url']['cat'];
+            $nexus = $this->Document->find("all",array(
+                'conditions' => array('Document.cat_id' => $nexus_id,"NOT"=>array("Document.docment_id"=>$id)),
+                'order' => array('Document.docment_created DESC'),
+                'limit' => 10
+            ));
+        }
+
+		$this->set(array(
+            'document'=>$this->Document->find('first', $options),
+            "nexus" =>$nexus
+        ));
 	}
 
     public function list_organs($id = null){

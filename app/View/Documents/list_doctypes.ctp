@@ -4,7 +4,7 @@
     <ul class="document_organ">
         <?php foreach($doctypes as $doctype):?>
             <li>
-                <p><a href="<?php echo $this->webroot.'documents/view/'.$doctype['Document']['docment_id']; ?>"><?php echo $doctype['Document']['docment_name'];?></a></p>
+                <p><a href="<?php echo $this->webroot.'documents/view/'.$doctype['Document']['docment_id'].'?doctype='.$doctype['Document']['doctype_id']; ?>"><?php echo $doctype['Document']['docment_name'];?></a></p>
             </li>
         <?php endforeach;?>
     </ul>

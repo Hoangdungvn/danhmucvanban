@@ -14,44 +14,48 @@
 //?>
 
 <div class="left_menu">
+    <!--List Loại Văn Bản-->
+    <div class="menu_doc">
+        <p><?php echo __("Điều ước quốc tế") ?></p>
+        <ul>
+            <?php foreach($left_menu['cat'] as $_cat_item) : ?>
+            <li>
+                <?php echo $this->Html->link($_cat_item['Cat']['cat_name'],array('controller'=>'documents','action'=>'list_cats',$_cat_item['Cat']['cat_id'])); ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <!--End List Loại Văn Bản-->
+
+    <!--List Loại Văn Bản-->
+    <div class="menu_doc">
+        <p><?php echo __("Quản lý ODA") ?></p>
+        <ul>
+            <?php foreach($left_menu['doctype'] as $_doctype_item) : ?>
+            <li>
+                <?php echo $this->Html->link($_doctype_item['Doctype']['doctype_name'],array('controller'=>'documents','action'=>'list_doctypes',$_doctype_item['Doctype']['doctype_id'])); ?>
+            </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <!--End List Loại Văn Bản-->
+
     <!--List Cơ quan ban hành-->
     <div class="menu_doc">
         <p><?php echo __("Cơ Quan Ban Hành ") ?></p>
         <ul>
             <?php foreach($left_menu['organ'] as $_organ_item) : ?>
                 <li>
-                    <?php echo $this->Html->link($_organ_item['Organ']['organ_name'],array('controller'=>'organs','action'=>'view',$_organ_item['Organ']['organ_id'])); ?>
+                    <?php echo $this->Html->link($_organ_item['Organ']['organ_name'],array('controller'=>'documents','action'=>'list_organs',$_organ_item['Organ']['organ_id'])); ?>
                 </li>
             <?php endforeach; ?>
         </ul>
     </div>
     <!--End List Cơ Quan ban hành-->
 
-    <!--List Loại Văn Bản-->
-    <div class="menu_doc">
-        <p><?php echo __("Loại Văn Bản") ?></p>
-        <ul>
-            <?php foreach($left_menu['doctype'] as $_doctype_item) : ?>
-                <li>
-                    <?php echo $this->Html->link($_doctype_item['Doctype']['doctype_name'],array('controller'=>'doctypes','action'=>'view',$_doctype_item['Doctype']['doctype_id'])); ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <!--End List Loại Văn Bản-->
 
-    <!--List Loại Văn Bản-->
-    <div class="menu_doc">
-        <p><?php echo __("Lĩnh Vực") ?></p>
-        <ul>
-            <?php foreach($left_menu['cat'] as $_cat_item) : ?>
-                <li>
-                    <?php echo $this->Html->link($_cat_item['Cat']['cat_name'],array('controller'=>'cats','action'=>'view',$_cat_item['Cat']['cat_id'])); ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <!--End List Loại Văn Bản-->
+
+
 
 
 </div>

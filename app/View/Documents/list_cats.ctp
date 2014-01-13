@@ -4,7 +4,7 @@
     <ul class="document_organ">
         <?php foreach($cats as $cat):?>
             <li>
-                <p><a href="<?php echo $this->webroot.'documents/view/'.$cat['Document']['docment_id']; ?>"><?php echo $cat['Document']['docment_name'];?></a></p>
+                <p><a href="<?php echo $this->webroot.'documents/view/'.$cat['Document']['docment_id'].'?cat='.$cat['Document']['cat_id']; ?>"><?php echo $cat['Document']['docment_name'];?></a></p>
             </li>
         <?php endforeach;?>
     </ul>
