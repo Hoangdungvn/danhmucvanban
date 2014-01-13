@@ -14,6 +14,15 @@ class User extends AppModel {
 	public $primaryKey = 'user_id';
     public $useTable = 'tblusers';
 
+  public $hasOne = array(
+      'Permission' => array(
+          'classname' => 'Permission',
+          'foreignKey'=>'user_id',
+          'dependent' => true
+      )
+  );
+
+
 /**
  * Validation rules
  *
@@ -51,4 +60,7 @@ class User extends AppModel {
 			),
 		),
 	);
+
+
+
 }

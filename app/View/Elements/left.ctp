@@ -12,50 +12,27 @@
 //    print_r($left_menu);
 //    echo "</pre>";
 //?>
+<?php if(count($left_menu['cat'])): ?>
+    <div class="left_menu">
 
-<div class="left_menu">
-    <!--List Loại Văn Bản-->
-    <div class="menu_doc">
-        <p><?php echo __("Điều ước quốc tế") ?></p>
-        <ul>
-            <?php foreach($left_menu['cat'] as $_cat_item) : ?>
-            <li>
-                <?php echo $this->Html->link($_cat_item['Cat']['cat_name'],array('controller'=>'documents','action'=>'list_cats',$_cat_item['Cat']['cat_id'])); ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <!--List Danh Muc Van Ban-->
+        <div class="menu_doc">
+            <p><?php echo __("Danh Mục Văn Bản") ?></p>
+            <ul>
+                <?php foreach($left_menu['cat'] as $key => $_cat_item)  : ?>
+                    <?php
+                    $numRepeat = $_cat_item['level'];
+                    $char = '';
+                    if ($numRepeat > 0) {
+                        $char .= str_repeat('---', $numRepeat);
+                    }
+                    ?>
+                    <li>
+                        <?php echo $this->Html->link($char . ' ' . $_cat_item['cate_name'],array('controller'=>'documents','action'=>'list_document','?' => array('cate_id' => $_cat_item['cate_id']))); ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <!--End Danh Muc Van Ban-->
     </div>
-    <!--End List Loại Văn Bản-->
-
-    <!--List Loại Văn Bản-->
-    <div class="menu_doc">
-        <p><?php echo __("Quản lý ODA") ?></p>
-        <ul>
-            <?php foreach($left_menu['doctype'] as $_doctype_item) : ?>
-            <li>
-                <?php echo $this->Html->link($_doctype_item['Doctype']['doctype_name'],array('controller'=>'documents','action'=>'list_doctypes',$_doctype_item['Doctype']['doctype_id'])); ?>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <!--End List Loại Văn Bản-->
-
-    <!--List Cơ quan ban hành-->
-    <div class="menu_doc">
-        <p><?php echo __("Cơ Quan Ban Hành ") ?></p>
-        <ul>
-            <?php foreach($left_menu['organ'] as $_organ_item) : ?>
-                <li>
-                    <?php echo $this->Html->link($_organ_item['Organ']['organ_name'],array('controller'=>'documents','action'=>'list_organs',$_organ_item['Organ']['organ_id'])); ?>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
-    <!--End List Cơ Quan ban hành-->
-
-
-
-
-
-
-</div>
+<?php endif; ?>

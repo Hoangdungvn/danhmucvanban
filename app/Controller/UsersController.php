@@ -113,4 +113,19 @@ class UsersController extends AppController {
 			$this->Session->setFlash(__('Người dùng chưa được xóa. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+    public function admin_login() {
+        if($this->request->is('post')){
+            $_dataInfo = $this->request->data;
+            $_query = $this->User->find('first',array(
+                'conditions' => array(
+                    'User.user_email' => $_dataInfo['User']['user_email'],
+                    'User.user_password' => $_dataInfo['User']['user_password'],
+                    'User.user_status' => 1
+                )
+            ));
+            var_dump($_query);die();
+        }
+    }
+}

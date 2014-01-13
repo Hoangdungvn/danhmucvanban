@@ -4,31 +4,40 @@
     <h4 class="document_name"><?php echo $document["Document"]["docment_name"]; ?></h4>
     <table class="table table-bordered dataTable" id="datatable" aria-describedby="datatable_info">
         <tbody role="alert" aria-live="polite" aria-relevant="all">
+        <tr class="gradeA even">
+            <td width="200px"><b><?php echo __('Số / Ký Hiệu') ?></b></td>
+            <td><?php echo $document["Document"]['document_symbol'];?></td>
+        </tr>
         <tr class="gradeA odd">
-            <td width="200px"><b>Ngày ký</b></td>
+            <td width="200px"><b><?php echo __("Ngày Ký") ?></b></td>
             <td><?php echo  date("d/m/Y", strtotime($document['Document']['document_signdate']));?></td>
         </tr><tr class="gradeA even">
-            <td style="width: 300px;"><b>Ngày hiệu lực</b></td>
-            <td class=" "><?php echo date("d/m/Y", strtotime($document['Document']['document_signdate']));?></td>
+            <td style="width: 300px;"><b><?php echo __("Ngày Có Hiệu Lực") ?></b></td>
+            <td class=" "><?php echo date("d/m/Y", strtotime($document['Document']['document_effective_date']));?></td>
         </tr>
         </tr><tr class="gradeA odd">
-            <td style="width: 300px;"><b>Người ký</b></td>
+            <td style="width: 300px;"><b><?php echo __("Người Ký") ?></b></td>
             <td class=" "><?php echo $document['Document']['document_signer'];?></td>
         </tr>
         </tr><tr class="gradeA odd">
-            <td style="width: 300px;"><b>Cơ quan ban hành</b></td>
-            <td class=" "><a href="<?php echo $this->webroot.'documents/list_organs/'.$document['Document']['organ_id'];?>"><?php echo $document['Organ']['organ_name'];?></a></td>
+            <td style="width: 300px;"><b><?php echo __("Cơ Quan Ban Hành") ?></b></td>
+            <td class=" "><?php echo $document['Organ']['organ_name'];?></td>
         </tr>
         </tr><tr class="gradeA odd">
-            <td style="width: 300px;"><b>Loại văn bản</b></td>
-            <td class=" "><a href="<?php echo $this->webroot.'documents/list_doctypes/'.$document['Document']['doctype_id'];?>"><?php echo $document['Doctype']['doctype_name'];?></a></td>
+            <td style="width: 300px;"><b><?php echo __("Loại Văn Bản") ?></b></td>
+            <td class=" "><?php echo $document['Doctype']['doctype_name'];?></td>
         </tr>
         </tr><tr class="gradeA odd">
-            <td style="width: 300px;"><b>lĩnh vực</b></td>
-            <td class=" "><a href="<?php echo $this->webroot.'documents/list_cats/'.$document['Document']['cat_id'];?>"><?php echo $document['Cat']['cat_name'];?></a></td>
+            <td style="width: 300px;"><b><?php echo __("Danh Mục Văn Bản") ?></b></td>
+            <td class=" ">
+                <?php echo $this->Html->link($document['Cat']['cate_name'],array('controller' =>'documents','action'=>'list_document','?'=> array('cate_id' => $document['Document']['cate_id']))); ?>
+            </td>
         </tr>
         </tr><tr class="gradeA odd">
-            <td style="width: 300px;" colspan="2"><b>Trích yếu : </b><?php echo $document['Document']['document_desc'];?></td>
+            <td style="width: 300px;" colspan="2">
+                <b>Trích yếu: </b>
+                <?php echo $document['Document']['docment_name'];?>
+            </td>
         </tr>
         </tbody>
     </table>

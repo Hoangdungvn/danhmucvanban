@@ -35,6 +35,7 @@ class AppController extends Controller {
     public $helpers = array('Form','Html');
     public $components = array('Session');
 
+
     public function beforeFilter() {
         if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
             $this->layout = 'admin';
@@ -50,11 +51,7 @@ class AppController extends Controller {
                         'fields' => array('Doctype.doctype_name','Doctype.doctype_id'),
                         'order' => array('Doctype.doctype_order ASC'),
                     )),
-                'cat' => ClassRegistry::init('Cat')->find('all',array(
-                        'conditions' => array('Cat.cat_status' => 1),
-                        'fields' => array('Cat.cat_id','Cat.cat_name'),
-                        'order' => array('Cat.cat_order ASC'),
-                    )),
+                'cat'  => ClassRegistry::init('Cat')->_getTreeCate()
             ));
         }
     }

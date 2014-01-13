@@ -14,8 +14,8 @@
                                     <div class="dataTables_filter" id="datatable_filter">
                                         <?php echo $this->Html->link(__('Thêm'), array('action' => 'add'), array("class"=>"btn btn-primary btn-add")); ?>
                                         <div class="input-group">
-                                            <form method="post" action="<?php echo $this->webroot.'admin/doctypes/search';?>" id="doctypesSearchForm">
-                                                <input type="text" placeholder="Tìm kiếm tên, mô tả, người ký" class="form-control" name="text_search">
+                                            <form method="post" action="<?php echo $this->webroot.'admin/documents/search';?>" id="documentSearchForm">
+                                                <input type="text" placeholder="Tìm kiếm số ký hiệu, tên, mô tả, người ký" class="form-control" name="text_search">
                                                 <span class="input-group-btn">
                                                 <button class="btn btn-primary" type="submit">Tìm kiếm</button>
                                                 </span>
@@ -43,28 +43,33 @@
                                 <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1" aria-sort="ascending"
                                     aria-label="Rendering engine: activate to sort column descending"
-                                    style="width: 100px;">Mã Văn bản
+                                    style="width: 50px;"><?php echo __("Mã Văn Bản") ?>
+                                </th>
+                                <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="datatable"
+                                    rowspan="1" colspan="1" aria-sort="ascending"
+                                    aria-label="Rendering engine: activate to sort column descending"
+                                    style="width: 100px;"><?php echo __("Số / Ký hiệu") ?>
                                 </th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending"
-                                    style="width: 256px;">Tên văn bản
+                                    style="width: 256px;"><?php echo __("Tên Văn Bản") ?>
                                 </th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending"
-                                    style="width: 236px;">Mô tả
+                                    style="width: 236px;"><?php echo __("Mô Tả") ?>
                                 </th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1"
                                     aria-label="Engine version: activate to sort column ascending"
-                                    style="width: 152px;">Ngày ký
+                                    style="width: 152px;"><?php echo __("Ngày Ký") ?>
                                 </th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 109px;"> Trạng Thái
+                                    style="width: 109px;"><?php echo __("Trạng Thái") ?>
                                 </th>
                                 <th class="sorting" role="columnheader" tabindex="0" aria-controls="datatable"
                                     rowspan="1" colspan="1" aria-label="CSS grade: activate to sort column ascending"
-                                    style="width: 109px;"> Chức năng
+                                    style="width: 109px;"><?php echo __("Chức Năng") ?>
                                 </th>
                             </tr>
                             </thead>
@@ -73,6 +78,7 @@
                             <?php $i=0; foreach ($documents as $document): $i++?>
                                 <tr class="gradeA <?php if($i %2 == 0){echo 'even'; }else{echo 'old';} ?>">
                                     <td class=" sorting_1"><?php echo h($document['Document']['docment_id']) ?></td>
+                                    <td class=" sorting_1"><?php echo h($document['Document']['document_symbol']) ?></td>
                                     <td class=" "><?php echo $this->Html->link(h($document['Document']['docment_name']),array('action'=>'view',$document['Document']['docment_id']))   ?></td>
                                     <td class=" "><?php echo $document['Document']['document_desc']  ?></td>
                                     <td class="center "><?php echo h($document['Document']['document_signdate'])  ?></td>

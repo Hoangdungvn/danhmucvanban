@@ -79,7 +79,7 @@ class PagesController extends AppController {
         parent::beforeFilter();
         $_new_documents = ClassRegistry::init('Document')->find('all',array(
             'conditions' => array('Document.document_status' => 1),
-            'fields' => array('Document.docment_id','Document.docment_name'),
+            'fields' => array('Document.docment_id','Document.docment_name','Document.document_symbol','Document.document_signdate'),
             'order' => array('Document.document_signdate DESC'),
             'limit' => 10
         ));

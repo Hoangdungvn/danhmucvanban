@@ -1,3 +1,6 @@
+<?php echo $this->Html->addCrumb('Danh sách danh mục văn bản','/admin/cats') ?>
+<?php echo $this->Html->addCrumb('Tìm kiếm') ?>
+
 <div class="cats index">
 	<h2><?php echo __('Quản lý lĩnh vực'); ?></h2>
     <div class="row">
@@ -34,15 +37,15 @@
     <?php if($cats):?>
 	<?php foreach ($cats as $cat): ?>
 	<tr>
-		<td><?php echo h($cat['Cat']['cat_id']); ?>&nbsp;</td>
-		<td><?php echo h($cat['Cat']['cat_name']); ?>&nbsp;</td>
-		<td><?php echo html_entity_decode($cat['Cat']['cat_desc'], ENT_QUOTES, 'UTF-8'); ?></td>
-		<td><?php echo ($cat['Cat']['cat_status'] == 1)? "Hiển thị" : "Ẩn"; ?>&nbsp;</td>
-		<td><?php echo h($cat['Cat']['cat_order']); ?>&nbsp;</td>
+		<td><?php echo h($cat['Cat']['cate_id']); ?>&nbsp;</td>
+		<td><?php echo h($cat['Cat']['cate_name']); ?>&nbsp;</td>
+		<td><?php echo html_entity_decode($cat['Cat']['cate_desc'], ENT_QUOTES, 'UTF-8'); ?></td>
+		<td><?php echo ($cat['Cat']['cate_status'] == 1)? "Hiển thị" : "Ẩn"; ?>&nbsp;</td>
+		<td><?php echo h($cat['Cat']['cate_order']); ?>&nbsp;</td>
 		<td class="actions" >
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $cat['Cat']['cat_id'])); ?>
-            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action' => 'edit', $cat['Cat']['cat_id']),array('class'=>'label label-default','escape'=>false)); ?>
-            <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('action' => 'delete',$cat['Cat']['cat_id']),array('class'=>'label label-danger','escape'=>false)); ?>
+			<?php echo $this->Html->link(__('View'), array('action' => 'view', $cat['Cat']['cate_id'])); ?>
+            <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action' => 'edit', $cat['Cat']['cate_id']),array('class'=>'label label-default','escape'=>false)); ?>
+            <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('action' => 'delete',$cat['Cat']['cate_id']),array('class'=>'label label-danger','escape'=>false)); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

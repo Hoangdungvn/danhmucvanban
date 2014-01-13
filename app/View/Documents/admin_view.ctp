@@ -5,6 +5,10 @@
     <table class="table .table-responsive">
         <tbody>
         <tr>
+            <td class="col-md-3 col-sm-3">Số / Ký hiệu</td>
+            <td class="col-md-9 col-sm-9"><?php echo $document['Document']['document_symbol'] ?></td>
+        </tr>
+        <tr>
             <td class="col-md-3 col-sm-3">Tên Văn bản</td>
             <td class="col-md-9 col-sm-9"><?php echo $document['Document']['docment_name'] ?></td>
         </tr>
@@ -24,7 +28,7 @@
         </tr>
         <tr>
             <td class="col-md-3 col-sm-3">Lĩnh Vực</td>
-            <td class="col-md-9 col-sm-9"><?php echo $this->Html->link($document['Cat']['cat_name'], array('controller' => 'cats', 'action' => 'view', $document['Cat']['cat_id'])); ?>
+            <td class="col-md-9 col-sm-9"><?php echo $this->Html->link($document['Cat']['cate_name'], array('controller' => 'cats', 'action' => 'view', $document['Cat']['cate_id'])); ?>
             </td>
         </tr>
         <tr>

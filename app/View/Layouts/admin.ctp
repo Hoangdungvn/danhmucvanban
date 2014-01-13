@@ -17,7 +17,7 @@
  */
 
 $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
-$_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') && ($this->params['controller'] == 'tblusers') && ($this->params['action'] == 'admin_login');
+$_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') && ($this->params['controller'] == 'users') && ($this->params['action'] == 'admin_login');
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,6 +96,6 @@ $_loginPage = (isset($this->params['prefix']) && $this->params['prefix'] == 'adm
             </div>
             <?php endif;?>
         </div>
-    <?php echo $this->element('sql_dump'); ?>
+<!--    --><?php //echo $this->element('sql_dump'); ?>
 </body>
 </html>

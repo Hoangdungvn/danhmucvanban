@@ -1601,9 +1601,7 @@ background:#dddddd;*/
     border: 1px solid;
     width: 800px;
     overflow: hidden;
-    height: 40px;
     text-overflow: ellipsis;
-    white-space: nowrap;
     padding: 10px 14px;
     display: inline-block;
     color: #ffffff;
@@ -1615,4 +1613,22 @@ background:#dddddd;*/
     background: -ms-linear-gradient(top, #1e569a 0%,#2a87d8 50%,#7eb8e8 100%); /* IE10+ */
     background: linear-gradient(to bottom, #1e569a 0%,#2a87d8 50%,#7eb8e8 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1e569a', endColorstr='#7eb8e8',GradientType=0 ); /* IE6-9 */
+}
+
+.header h3.new-document{
+    color: #B40006;
+    display: block;
+    font-family: Tahoma,Arial,Helvetica,sans-serif;
+    font-size: 12px;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+    padding: 7px 0 5px 10px;
+    text-transform: uppercase;
+    background: url(/img/yellow_green_long.gif) 0 0 no-repeat;
+    margin-bottom: 10px;
 }

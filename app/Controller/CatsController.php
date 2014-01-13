@@ -14,8 +14,14 @@ class CatsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+    public function beforeFilter(){
+        parent::beforeFilter();
+        if(isset($this->params['prefix']) && $this->params['prefix'] == 'admin'){
+            $this->set('head_title','Quản Lý Danh Mục Văn Bản');
+        }
+    }
 
-/**
+    /**
  * index method
  *
  * @return void
@@ -138,19 +144,23 @@ class CatsController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Cat->create();
 			if ($this->Cat->save($this->request->data)) {
-				$this->Session->setFlash(__('Lĩnh vực đã được lưu.'));
+				$this->Session->setFlash(__('Lĩnh vực đã được lưu.'),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('Lĩnh vực chưa lưu được. Xin hãy thử lại.'));
+				$this->Session->setFlash(__('Lĩnh vực chưa lưu được. Xin hãy thử lại.'),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		}
+        $_listCat = $this->Cat->_getTreeCate();
+        $this->set('listCat',$_listCat);
 	}
 
     public function admin_search() {
         if (!empty($this->data))
         {
             $name = $this->request->data['text_search'];
-            $conditions = array("or"=>array("Cat.cat_name Like " => "%$name%","Cat.cat_desc Like "=>"%$name%"));
+            $conditions = array("or"=>array("Cat.cate_name Like " => "%$name%","Cat.cate_desc Like "=>"%$name%"));
             $result = $this->Cat->find('all', array('conditions'=> $conditions));
             $this->set(array('cats'=> $result,"text_search"=>$name));
         }else{
@@ -180,8 +190,13 @@ class CatsController extends AppController {
 		} else {
 			$options = array('conditions' => array('Cat.' . $this->Cat->primaryKey => $id));
 			$this->request->data = $this->Cat->find('first', $options);
+
 		}
-	}
+        $_listCat = $this->Cat->_getTreeCate();
+        $this->set('listCat',$_listCat);
+
+
+    }
 
 /**
  * admin_delete method
@@ -202,4 +217,5 @@ class CatsController extends AppController {
 			$this->Session->setFlash(__('Lĩnh vực chưa được xóa. Xin hãy thử lại.'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+}

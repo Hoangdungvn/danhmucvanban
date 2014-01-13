@@ -135,7 +135,7 @@ class Document extends AppModel {
 		),
 		'Cat' => array(
 			'className' => 'Cat',
-			'foreignKey' => 'cat_id',
+			'foreignKey' => 'cate_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

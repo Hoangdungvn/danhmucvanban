@@ -77,47 +77,26 @@ class DocumentsController extends AppController {
         ));
 	}
 
-    public function list_organs($id = null){
-        if (!$id) {
-            throw new NotFoundException(__('Invalid organ'));
-        }
-        $list = $this->Document->Find("all",array(
-            'conditions' => array('Document.organ_id' => $id)
-        ));
-        $organ_name = $this->Document->find("first",array("conditions"=>array("Document.organ_id"=>$id)));
-        $this->set(array(
-            "documents"=>$list,
-            "organ_name"=>$organ_name
-        ));
+    /*
+    * Get List Document By CatId
+    * */
+    public function list_document()
+    {
+        $cat_id = $this->request->query('cate_id');
+
+        $this->Paginator->settings = array(
+            'conditions' => array(
+                'Document.cate_id' => $cat_id,
+                'Document.document_status' => 1
+            ),
+            'order' => array('Document.document_signdate DESC'),
+            'limit' => 1
+        );
+        $this->set('documents', $this->Paginator->paginate());
     }
 
-    public function list_cats($id = null){
-        if (!$id) {
-            throw new NotFoundException(__('Invalid organ'));
-        }
-        $list = $this->Document->Find("all",array(
-            'conditions' => array('Document.cat_id' => $id)
-        ));
-        $cat_name = $this->Document->find("first",array("conditions"=>array("Document.cat_id"=>$id)));
-        $this->set(array(
-            "cats"=>$list,
-            "cat_name"=>$cat_name
-        ));
-    }
 
-    public function list_doctypes($id = null){
-        if (!$id) {
-            throw new NotFoundException(__('Invalid organ'));
-        }
-        $list = $this->Document->Find("all",array(
-            'conditions' => array('Document.doctype_id' => $id)
-        ));
-        $doctype_name = $this->Document->find("first",array("conditions"=>array("Document.doctype_id"=>$id)));
-        $this->set(array(
-            "doctypes"=>$list,
-            "doctype_name"=>$doctype_name
-        ));
-    }
+
 
 /**
  * add method
@@ -204,13 +183,18 @@ class DocumentsController extends AppController {
         if (!empty($this->data))
         {
             $name = $this->request->data['text_search'];
-            $conditions = array("or"=>array(
-                "Document.document_name Like " => "%$name%",
-                "Document.document_desc Like "=>"%$name%",
-                "Document.document_signer Like"=>"%$name%"
-            ));
-            $result = $this->Document->find('all', array('conditions'=> $conditions));
-            $this->set(array('documents'=> $result,"text_search"=>$name));
+
+            $this->Paginator->settings = array(
+                'conditions' => array("or"=>array(
+                    "Document.docment_name Like " => "%$name%",
+                    "Document.document_desc Like "=>"%$name%",
+                    "Document.document_signer Like"=>"%$name%",
+                    "Document.document_symbol Like"=>"%$name%"
+                ))
+            );
+
+            $this->set('documents', $this->Paginator->paginate());
+            $this->set("text_search", $name);
         }else{
             $this->set(array('documents'=> null,"text_search" => null));
         }
@@ -274,10 +258,7 @@ class DocumentsController extends AppController {
             'fields' => array('Organ.organ_id','Organ.organ_name'),
             'conditions' => array('Organ.organ_status',1)
         ));
-		$cats = $this->Document->Cat->find('list',array(
-            'fields' => array('Cat.cat_id','Cat.cat_name'),
-            'conditions' => array('Cat.cat_status',1)
-        ));
+		$cats = $this->Document->Cat->_getTreeCate();
 		$this->set(compact('doctypes', 'organs', 'cats'));
 	}
 
@@ -326,11 +307,8 @@ class DocumentsController extends AppController {
             'fields' => array('Organ.organ_id','Organ.organ_name'),
             'conditions' => array('Organ.organ_status',1)
         ));
-		$cats = $this->Document->Cat->find('list',array(
-            'fields' => array('Cat.cat_id','Cat.cat_name'),
-            'conditions' => array('Cat.cat_status',1)
-        ));
-		$this->set(compact('doctypes', 'organs', 'cats'));
+		$cats = $this->Document->Cat->_getTreeCate();
+		$this->set(compact('doctypes', 'organs','cats'));
 	}
 
 /**
@@ -345,11 +323,17 @@ class DocumentsController extends AppController {
 		if (!$this->Document->exists()) {
 			throw new NotFoundException(__('Invalid document'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+//		$this->request->onlyAllow('post', 'delete');
 		if ($this->Document->delete()) {
-			$this->Session->setFlash(__('The document has been deleted.'));
+            $this->Session->setFlash(__('The document has been saved.'),'default',
+                array('class' => 'alert alert-success'));
+			$this->Session->setFlash(__('The document has been deleted.'),'default',
+                array('class' => 'alert alert-success'));
 		} else {
-			$this->Session->setFlash(__('The document could not be deleted. Please, try again.'));
+			$this->Session->setFlash(__('The document could not be deleted. Please, try again.'),'default',
+                array('class' => 'alert alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
-	}}
+	}
+
+}

@@ -1,9 +1,13 @@
+<?php echo $this->Html->addCrumb('Danh sách danh mục văn bản','/admin/cats') ?>
+<?php echo $this->Html->addCrumb('Sửa danh mục') ?>
+
+
+
 <div class="cats form">
 <?php echo $this->Form->create('Cat'); ?>
 	<fieldset>
-		<legend><?php echo __('Sửa lĩnh vực'); ?></legend>
+		<legend><?php echo __('Sửa Danh Mục'); ?></legend>
 	<?php
-		echo $this->Form->input('cat_id');
         echo $this->Form->input('cat_name' ,array(
             'label' => 'Tên lĩnh vực <em>*</em>',
             'div' => 'form-group',
@@ -34,6 +38,22 @@
             'placeholder' => 'Điền số thứ tự'
         ));
 	?>
+        <div class="form-group required">
+            <label for="parentId">Danh Mục Văn Bản <em>*</em></label>
+            <select name="data[Cat][parent_id]" parsley-trigger="change" class="form-control" id="parentId">
+                <option value="0"><?php echo __('Chọn Danh mục cha') ?></option>
+                <?php foreach ($listCat as $key => $val):?>
+                    <?php
+                    $numRepeat = $val['level'];
+                    $char = '';
+                    if ($numRepeat > 0) {
+                        $char .= str_repeat('---', $numRepeat);
+                    }
+                    ?>
+                    <option value="<?php echo $val['cate_id'] ?>" <?php if($this->request->data['Cat']['parent_id'] == $val['cate_id'] ): ?> selected <?php endif; ?>><?php echo $char . ' ' . $val['cate_name']; ?></option>
+                <?php endforeach;?>
+            </select>
+        </div>
 	</fieldset>
 <?php echo $this->Form->end(__('Sửa')); ?>
 </div>

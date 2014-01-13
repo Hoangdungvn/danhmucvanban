@@ -1,9 +1,11 @@
 
 <?php echo $this->Html->addCrumb('Sửa văn bản') ?>
 <?php
-    $file = $this->request->data['Document']['document_file'];
-    $explode_name = explode("/",$file);
-    $_filename = $explode_name[1];
+    if($file = $this->request->data['Document']['document_file']){
+        $explode_name = explode("/",$file);
+        $_filename = $explode_name[1];
+    };
+    $_cateId = $this->request->data['Document']['cate_id'];
 ?>
 <div class="row">
     <div class="col-sm-12 col-md-12">
@@ -36,6 +38,16 @@
                     'required' => '',
                     'class'    => 'ckeditor form-control',
                     'placeholder' => 'Mô tả văn bản văn bản'
+
+                ));
+
+                echo $this->Form->input('document_symbol',array(
+                    'label' => 'Số / Ký hiệu <em>*</em>',
+                    'div' => 'form-group',
+                    'parsley-trigger' => 'change',
+                    'required' => '',
+                    'class'    => 'form-control',
+                    'placeholder' => 'Số / Ký hiệu',
 
                 ));
 
@@ -73,20 +85,33 @@
                     'class'    => 'form-control',
 
                 ));
-                echo $this->Form->input('cat_id',array(
-                    'label' => 'Lĩnh Vực <em>*</em>',
-                    'div' => 'form-group',
-                    'parsley-trigger' => 'change',
-                    'required' => '',
-                    'class'    => 'form-control',
-                ));
+                ?>
+
+                <div class="form-group required">
+                    <label for="DocumentCateId">Danh Mục Văn Bản <em>*</em></label>
+                    <select name="data[Document][cate_id]" parsley-trigger="change" class="form-control" id="DocumentCateId">
+                        <?php foreach ($cats as $key => $val):?>
+                            <?php
+                            $numRepeat = $val['level'];
+                            $char = '';
+                            if ($numRepeat > 0) {
+                                $char .= str_repeat('---', $numRepeat);
+                            }
+                            ?>
+                            <option value="<?php echo $val['cate_id'] ?>" <?php if($_cateId == $val['cate_id'] ):?> selected <?php endif;?>><?php echo $char . ' ' . $val['cate_name']; ?></option>
+                        <?php endforeach;?>
+                    </select>
+                </div>
+
+                <?php
 
                 echo $this->Form->input('file_upload',array(
                     'type' => 'file',
                     'label' => 'File Đính Kèm'
                 ));
-
-                echo $this->Html->link($_filename,$this->webroot.'document'.$_filename);
+                if($this->request->data['Document']['document_file']){
+                    echo $this->Html->link($_filename,$this->webroot.'document'.$_filename);
+                }
 
                 echo $this->Form->input('document_status',array(
                     'label' => 'Trạng Thái <em>*</em>',
