@@ -66,7 +66,24 @@ class PagesController extends AppController {
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 
 		try {
-			$this->render(implode('/', $path));
+            $_urlPage = implode('/', $path);
+            /*
+             * Check if home page then use template home.ctp
+             * other use template static_page.ctp
+             * */
+            if($_urlPage == 'home'){
+                $this->render(implode('/', $path));
+            }else{
+                $this->loadModel('Content');
+                $_content = $this->Content->find('first',array(
+                    'conditions' => array(
+                        'Content.content_status' => 1,
+                        'Content.content_url_key' => $_urlPage
+                    )
+                ));
+                $this->set('content',$_content);
+                $this->render('static_page');
+            }
 		} catch (MissingViewException $e) {
 			if (Configure::read('debug')) {
 				throw $e;

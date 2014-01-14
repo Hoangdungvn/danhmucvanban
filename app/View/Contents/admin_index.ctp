@@ -1,3 +1,5 @@
+<?php echo $this->Html->addCrumb('Danh sách trang') ?>
+
 <div class="contents index">
 	<h2><?php echo __('Quản lý trang'); ?></h2>
     <div class="row">
@@ -29,21 +31,18 @@
 			<th><?php echo $this->Paginator->sort('content_desc',"Mô tả"); ?></th>
 			<th><?php echo $this->Paginator->sort('content_creatdate',"Ngày tạo"); ?></th>
 			<th><?php echo $this->Paginator->sort('content_status',"Trạng thái"); ?></th>
-			<th><?php echo $this->Paginator->sort('content_modifydate',"Hiển thị"); ?></th>
 			<th class="actions" width="115px"><?php echo __('Chức năng'); ?></th>
 	</tr>
 	<?php foreach ($contents as $tblcontent): ?>
 	<tr>
 		<td><?php echo h($tblcontent['Content']['content_id']); ?></td>
-		<td><?php echo html_entity_decode($tblcontent['Content']['content_name'], ENT_QUOTES, 'UTF-8'); ?></td>
+		<td><?php echo $this->Html->link(html_entity_decode($tblcontent['Content']['content_name'], ENT_QUOTES, 'UTF-8'),array('action'=>'view',$tblcontent['Content']['content_id'])); ?></td>
 		<td><?php echo html_entity_decode($tblcontent['Content']['content_desc'], ENT_QUOTES, 'UTF-8'); ?>&nbsp;</td>
 		<td><?php echo h($tblcontent['Content']['content_creatdate']); ?>&nbsp;</td>
 		<td><?php echo ($tblcontent['Content']['content_status'] == 1)? "Hiển thị" : "Ẩn"; ?>&nbsp;</td>
-		<td><?php echo h($tblcontent['Content']['content_modifydate']); ?>&nbsp;</td>
 		<td class="actions">
             <?php echo $this->Html->link('<i class="fa fa-pencil"></i>',array('action' => 'edit', $tblcontent['Content']['content_id']),array('class'=>'label label-default','escape'=>false)); ?>
             <?php echo $this->Html->link('<i class="fa fa-times"></i>',array('action' => 'delete',$tblcontent['Content']['content_id']),array('class'=>'label label-danger','escape'=>false)); ?>
-			<?php echo $this->Html->link(__('Chi tiết'), array('action' => 'view', $tblcontent['Content']['content_id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

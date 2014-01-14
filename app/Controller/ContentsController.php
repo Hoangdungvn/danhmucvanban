@@ -15,6 +15,13 @@ class ContentsController extends AppController {
  */
 	public $components = array('Paginator');
 
+    public function beforeFilter(){
+        parent::beforeFilter();
+        if(isset($this->params['prefix']) && $this->params['prefix'] == 'admin'){
+            $this->set('head_title','Quản lý Trang');
+        }
+    }
+
 /**
  * index method
  *
@@ -135,13 +142,25 @@ class ContentsController extends AppController {
  */
 	public function admin_add() {
 		if ($this->request->is('post')) {
-			$this->Content->create();
-			if ($this->Content->save($this->request->data)) {
-				$this->Session->setFlash(__('The tblcontent has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The tblcontent could not be saved. Please, try again.'));
-			}
+            $_data = $this->request->data;
+            $_check = $this->Content->find('count',array(
+                    'conditions' => array('Content.content_url_key' => $_data['Content']['content_url_key'])
+                ));
+            if(!$_check){
+                $this->Content->create();
+                $_data['Content']['content_creatdate'] = date('Y-m-d');
+                if ($this->Content->save($_data)) {
+                    $this->Session->setFlash(__("Trang '%s' đã tạo thành công",$_data['Content']['content_url_key']),'default',
+                        array('class' => 'alert alert-success'));
+                    return $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash(__('Có lỗi khi tạo trang. Vui lòng xem lại'),'default',
+                        array('class' => 'alert alert-danger'));
+                }
+            }else{
+                $this->Session->setFlash(__("Trang '%s' đã tồn tại. Vui lòng tạo trang mới.",$_data['Content']['content_url_key']),'default',
+                    array('class' => 'alert alert-danger'));
+            }
 		}
 	}
 
@@ -156,12 +175,18 @@ class ContentsController extends AppController {
 		if (!$this->Content->exists($id)) {
 			throw new NotFoundException(__('Invalid tblcontent'));
 		}
+
 		if ($this->request->is(array('post', 'put'))) {
+            $this->Content->id = $id;
+            $_data = $this->request->data;
+            $_data['Content']['content_modifydate'] = date("Y-m-d");
 			if ($this->Content->save($this->request->data)) {
-				$this->Session->setFlash(__('The tblcontent has been saved.'));
+				$this->Session->setFlash(__("Trang %s đã được cập nhật thành công",$_data['Content']['content_url_key']),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tblcontent could not be saved. Please, try again.'));
+				$this->Session->setFlash(__("Trang %s chưa được cập nhật thành công. Vui lòng xem lại",$_data['Content']['content_url_key']),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('content.' . $this->Content->primaryKey => $id));
