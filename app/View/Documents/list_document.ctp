@@ -53,6 +53,10 @@
                                                  {:count} văn bản.'
                                             );?></div>
                                     </div>
+                                    <?php
+                                        $_pageNum = (int) $this->Paginator->counter('{:count}');
+                                    ?>
+                                    <?php if($_pageNum > 1):?>
                                     <div class="pull-right">
                                         <div class="dataTables_paginate paging_bs_normal">
                                             <?php
@@ -62,6 +66,7 @@
                                             ?>
                                         </div>
                                     </div>
+                                    <?php endif; ?>
                                     <div class="clearfix"></div>
                                 </div>
                             </div>

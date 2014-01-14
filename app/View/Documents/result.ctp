@@ -55,15 +55,20 @@
                                          {:count} văn bản.'
                                     );?></div>
                             </div>
-                            <div class="pull-right">
-                                <div class="dataTables_paginate paging_bs_normal">
-                                    <?php
-                                    echo $this->Paginator->prev('< ' . __('Trước '), array(), null, array('class' => 'prev disabled'));
-                                    echo $this->Paginator->numbers(array('separator' => ' | '));
-                                    echo $this->Paginator->next(__(' Sau') . ' >', array(), null, array('class' => 'next disabled'));
-                                    ?>
+                            <?php
+                                $_pageNum = (int) $this->Paginator->counter('{:count}');
+                            ?>
+                            <?php if($_pageNum > 1): ?>
+                                <div class="pull-right">
+                                    <div class="dataTables_paginate paging_bs_normal">
+                                        <?php
+                                        echo $this->Paginator->prev('< ' . __('Trước '), array(), null, array('class' => 'prev disabled'));
+                                        echo $this->Paginator->numbers(array('separator' => ' | '));
+                                        echo $this->Paginator->next(__(' Sau') . ' >', array(), null, array('class' => 'next disabled'));
+                                        ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
                             <div class="clearfix"></div>
                         </div>
                     </div>
