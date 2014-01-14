@@ -1637,3 +1637,11 @@ background:#dddddd;*/
     float: left;
     margin-right: 10px;
 }
+
+.parsley-error-list{
+    clear: both;
+}
+.parsley-error-list .required,.parsley-error-list .custom-error-message
+{
+    color: red;
+}

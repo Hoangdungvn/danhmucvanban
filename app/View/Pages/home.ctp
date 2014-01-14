@@ -2,49 +2,32 @@
 
     <div class="box_nghiep_vu">
         <div class="nghiep_vu">
-            <?php echo $this->Form->create('Document',array(
-                'url' => array('controller' => 'documents','action' =>'search')
-            )) ?>
+            <form action="/documents/search" id="DocumentDisplayForm" method="post" accept-charset="utf-8" parsley-validate>
+                <div style="display:none;">
+                    <input type="hidden" name="_method" value="POST">
+                </div>
                 <div class="text_left">Từ Khóa</div>
-            <?php echo $this->Form->input('document_name',array(
-                'div' =>'input_text',
-                'class' =>'long',
-                'label' => false
-            )) ?>
+                <div class="input_text">
+                    <input name="data[Document][document_name]" class="long required"  placeholder="Tìm theo số ký hiệu hoặc tên văn bản" type="text" id="DocumentDocumentName" parsley-error-message="Vui lòng điền số ký hiệu hoặc tên văn bàn cần tìm" >
+                </div>
                 <div class="nghiep_vu">
                     <div class="text_left"></div>
                     <div class="input_text">
-                        <input
-                            id="rdSokyhieu" type="radio"
-                            name="search_in" value="rdSokyhieu"
-                            checked="checked">
-                        <label
-                            for="rdSokyhieu">Số
+                        <input id="rdSokyhieu" type="radio" name="data[Document][search_in]" value="rdSokyhieu" checked="checked">
+                        <label for="rdSokyhieu">Số
                             ký hiệu, trích yếu</label>
-                        <input
-                            id="rdToanvan" type="radio"
-                            name="search_in"
-                            value="rdToanvan">
-                        <label
-                            for="rdToanvan">Toàn văn</label>
+                        <input id="rdToanvan" type="radio" name="data[Document][search_in]" value="rdToanvan">
+                        <label for="rdToanvan">Toàn văn</label>
                     </div>
                 </div>
                 <div class="nghiep_vu">
                     <div class="text_left"></div>
                     <div class="input_text" style="padding:5px 0">
-                        <?php echo $this->Form->button('Tìm kiếm',array(
-                            'type' =>'submit',
-                            'class' => 'btn btn-primary btn-document-search'
-                        )) ?>
-                        <span>
-                            <?php echo $this->Html->link("Tìm kiếm nâng cao",array(
-                                'controller' =>'documents',
-                                'action'    =>'advance_search'
-                            ),array('class' => 'btn-advance-search')) ?>
-                        </span>
+                        <button type="submit" class="btn btn-primary btn-document-search">Tìm kiếm</button>                        <span>
+                            <a href="/documents/advance_search" class="btn-advance-search">Tìm kiếm nâng cao</a>                        </span>
                     </div>
                 </div>
-            <?php echo  $this->Form->end() ?>
+            </form>
 
         </div>
     </div>

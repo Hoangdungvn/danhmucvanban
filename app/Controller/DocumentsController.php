@@ -336,4 +336,52 @@ class DocumentsController extends AppController {
 		return $this->redirect(array('action' => 'index'));
 	}
 
+    /*
+     * search method
+     * */
+    public function search()
+    {
+        if($this->request->is('post')){
+            $_data = $this->request->data;
+            $_keySearch = $_data['Document']['document_name'];
+            switch($_data['Document']['search_in']){
+                case 'rdSokyhieu':
+                    $_conditions = array(
+                        "Document.document_symbol LIKE" => "%{$_keySearch}%",
+                        "Document.document_status" => 1
+                    );
+                    break;
+                case 'rdToanvan':
+                    $_conditions = array(
+                        "Document.document_status" => 1,
+                        'OR' => array(
+                            "Document.document_symbol LIKE" => "%{$_keySearch}%",
+                            "Document.docment_name LIKE" => "%{$_keySearch}%",
+                            "Document.document_signer LIKE" => "%{$_keySearch}%",
+                        )
+                    );
+                    break;
+            }
+            $this->Paginator->settings = array(
+                'conditions' => $_conditions
+            );
+
+            $_documents = $this->Paginator->paginate();
+            $this->set(compact('_documents','_keySearch'));
+        }
+        /*reset Template*/
+        $this->render('result');
+    }
+
+    /*
+     * Advance search method
+     * */
+
+    public function advance_search()
+    {
+        if($this->request->is('post')){
+
+        }
+    }
+
 }

@@ -40,6 +40,7 @@ $cakeDescription = __d('cake_dev', 'Tra cứu thông tin văn bản');
     echo $this->Html->script('jquery.js');
     echo $this->Html->script('jquery.ui/jquery-ui.js');
     echo $this->Html->script('jquery.fileDownload.js');
+    echo $this->Html->script('parsley.js');
 
     echo $this->fetch('meta');
     echo $this->fetch('css');
