@@ -90,7 +90,7 @@ class DocumentsController extends AppController {
                 'Document.document_status' => 1
             ),
             'order' => array('Document.document_signdate DESC'),
-            'limit' => 1
+            'limit' => 10
         );
         $this->set(array('documents' => $this->Paginator->paginate(), '_catName' => $_catModel['Cat']['cate_name']));
     }
@@ -190,7 +190,8 @@ class DocumentsController extends AppController {
                     "Document.document_desc Like "=>"%$name%",
                     "Document.document_signer Like"=>"%$name%",
                     "Document.document_symbol Like"=>"%$name%"
-                ))
+                )),
+                'limit' => 10
             );
 
             $this->set('documents', $this->Paginator->paginate());
@@ -363,7 +364,8 @@ class DocumentsController extends AppController {
                     break;
             }
             $this->Paginator->settings = array(
-                'conditions' => $_conditions
+                'conditions' => $_conditions,
+                'limit'      => 10
             );
 
             $_documents = $this->Paginator->paginate();
@@ -394,7 +396,8 @@ class DocumentsController extends AppController {
             );
 
             $this->Paginator->settings = array(
-                'conditions' => $_conditions
+                'conditions' => $_conditions,
+                'limit'      => 10
             );
 
             $_documents = $this->Paginator->paginate();

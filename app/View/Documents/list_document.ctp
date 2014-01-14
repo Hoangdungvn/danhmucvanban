@@ -49,7 +49,7 @@
                                 <div class="col-sm-12">
                                     <div class="pull-left">
                                         <div class="dataTables_info" id="datatable_info"><?php echo $this->Paginator->counter(
-                                                'Trang {:page} of {:pages}, Hiển thị {:current} trên
+                                                'Trang {:page} trên {:pages}, Hiển thị {:current} trên
                                                  {:count} văn bản.'
                                             );?></div>
                                     </div>
