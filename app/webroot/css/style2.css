@@ -192,7 +192,7 @@ a {text-decoration:none}
     width:155px;
     font:normal 12px Arial, Helvetica, sans-serif;
     padding:5px 5px 5px 25px;
-    background:url(/img/note_danhmuc.gif) 15px 11px no-repeat;
+    background:url(/img/folder.png) 8px 5px no-repeat;
     border-top:solid 1px #d1e3f1;}
 
 .menu_doc ul ul li {
@@ -1644,4 +1644,21 @@ background:#dddddd;*/
 .parsley-error-list .required,.parsley-error-list .custom-error-message
 {
     color: red;
+}
+
+.advance-search-title{
+    text-align: center;
+    padding: 7px 188px 7px 0;
+    margin: 0;
+    font: bold 16px Arial, Helvetica, sans-serif;
+    color: #FF0000;
+    text-transform: uppercase;
+}
+
+#left-navigation .level-1{
+    margin-left: 12px;
+}
+
+#left-navigation .level-2{
+    margin-left: 24px;
 }

@@ -83,7 +83,7 @@ class DocumentsController extends AppController {
     public function list_document()
     {
         $cat_id = $this->request->query('cate_id');
-
+        $_catModel = $this->Document->Cat->findByCateId($cat_id);
         $this->Paginator->settings = array(
             'conditions' => array(
                 'Document.cate_id' => $cat_id,
@@ -92,7 +92,7 @@ class DocumentsController extends AppController {
             'order' => array('Document.document_signdate DESC'),
             'limit' => 1
         );
-        $this->set('documents', $this->Paginator->paginate());
+        $this->set(array('documents' => $this->Paginator->paginate(), '_catName' => $_catModel['Cat']['cate_name']));
     }
 
 
@@ -380,8 +380,30 @@ class DocumentsController extends AppController {
     public function advance_search()
     {
         if($this->request->is('post')){
+            $_data = $this->request->data;
+            $_cate = $this->Document->Cat->findByCateId($_data['Document']['cate_id']);
+            $_keySearch = "";
+            $_keySearch .= "Tên Văn Bản: ".$_data['Document']['docment_name'] . " Và " . "Số / Ký hiệu: ".$_data['Document']['document_symbol'];
+            $_keySearch .= " Và " . "Người Ký: ". $_data['Document']['document_signer'] . " Và " . "Danh Mục: ". $_cate['Cat']['cate_name'];
+            $_conditions = array(
+                "Document.document_status" => 1,
+                "Document.docment_name LIKE" => "%{$_data['Document']['docment_name']}%",
+                "Document.document_symbol LIKE" => "%{$_data['Document']['document_symbol']}%",
+                "Document.document_signer LIKE" => "%{$_data['Document']['document_signer']}%",
+                "Document.cate_id LIKE" => "%{$_data['Document']['cate_id']}%"
+            );
 
+            $this->Paginator->settings = array(
+                'conditions' => $_conditions
+            );
+
+            $_documents = $this->Paginator->paginate();
+            $this->set(compact('_documents','_keySearch'));
+            $this->render('result');
         }
+        $cats = $this->Document->Cat->_getTreeCate();
+        $this->set(compact('cats'));
+
     }
 
 }

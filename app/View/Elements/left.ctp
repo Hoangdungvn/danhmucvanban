@@ -18,17 +18,14 @@
         <!--List Danh Muc Van Ban-->
         <div class="menu_doc">
             <p><?php echo __("Danh Mục Văn Bản") ?></p>
-            <ul>
+            <ul id="left-navigation">
                 <?php foreach($left_menu['cat'] as $key => $_cat_item)  : ?>
                     <?php
                     $numRepeat = $_cat_item['level'];
-                    $char = '';
-                    if ($numRepeat > 0) {
-                        $char .= str_repeat('---', $numRepeat);
-                    }
+                    $_class = "level-".$numRepeat;
                     ?>
-                    <li>
-                        <?php echo $this->Html->link($char . ' ' . $_cat_item['cate_name'],array('controller'=>'documents','action'=>'list_document','?' => array('cate_id' => $_cat_item['cate_id']))); ?>
+                    <li  class = "<?php echo $_class; ?>">
+                        <?php echo $this->Html->link( $_cat_item['cate_name'],array('controller'=>'documents','action'=>'list_document','?' => array('cate_id' => $_cat_item['cate_id']))); ?>
                     </li>
                 <?php endforeach; ?>
             </ul>

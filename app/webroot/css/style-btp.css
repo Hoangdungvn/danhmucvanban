@@ -57,8 +57,16 @@ html, body {background:#006DD7;}
 #menu .right .search div input {background:url(/img/btp-search-input.gif) no-repeat top left; padding:4px 5px; float:left; width:158px; height:15px;}
 #menu .right .search div a {display:block; height:18px; width:19px; float:right; padding:0px;}
 
-#footer {background:url(/img/btp-footer-header-bg.gif) no-repeat top center; height:139px;}
-#footer .footer-content {padding:8px 15px;}
+#footer { height:108px;}
+#footer .footer-content {
+    text-align: center;
+    text-indent: inherit;
+    text-transform: uppercase;
+    padding: 30px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
 #footer .footer-content .info {padding:15px 0px 0px 0px; color:#fff; line-height:150%;}
 #footer .footer-content .info p {line-height:150%;}
 
