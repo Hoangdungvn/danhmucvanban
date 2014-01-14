@@ -70,8 +70,17 @@ class PermissionsController extends AppController {
                 $perm = $view.",".$add.",".$update.",".$delete;
                 $user_id = $this->request->data["userid"];
                 $module = $this->request->data["moduleid_$module_id"];
-                $result = $this->Permission->query("INSERT INTO tblpermissions (user_id,module_id,permission_number) VALUE ('".$user_id."' , '".$module."', '".$perm."')");
-
+                $result = $this->Permission->save(array(
+                    "user_id"=>$user_id,
+                    "module_id"=>$module,
+                    "permission_number"=>$perm
+                ));
+//                $result = $this->Permission->query("INSERT INTO tblpermissions (user_id,module_id,permission_number) VALUE ('".$user_id."' , '".$module."', '".$perm."')");
+                if($result){
+                    $this->Session->setFlash('Thêm quyền thành công');
+                }else{
+                    $this->Session->setFlash('Thêm quyền không thành công. Xin hãy xem lại.');
+                }
             }
 		}
 		$this->set(compact('users', 'modules'));
