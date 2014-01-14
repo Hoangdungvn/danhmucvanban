@@ -77,9 +77,11 @@ class PermissionsController extends AppController {
                 ));
 //                $result = $this->Permission->query("INSERT INTO tblpermissions (user_id,module_id,permission_number) VALUE ('".$user_id."' , '".$module."', '".$perm."')");
                 if($result){
-                    $this->Session->setFlash('Thêm quyền thành công');
+                    $this->Session->setFlash(__('Thêm quyền thành công.'),'default',
+                        array('class' => 'alert alert-success'));
                 }else{
-                    $this->Session->setFlash('Thêm quyền không thành công. Xin hãy xem lại.');
+                    $this->Session->setFlash(__('Thêm quyền không thành công.Xin hãy xem lại.'),'default',
+                        array('class' => 'alert alert-danger'));
                 }
             }
 		}
@@ -107,10 +109,12 @@ class PermissionsController extends AppController {
             $this->Permission->id = $id;
             $result = $this->Permission->save($data);
             if ($result) {
-                $this->Session->setFlash(__('Quyền hạn đã được sửa'));
+                $this->Session->setFlash(__('Quyền hạn đã được sửa.'),'default',
+                    array('class' => 'alert alert-success'));
                 return $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Quyền hạn chưa sửa được.Xin hãy thử lại.'));
+                $this->Session->setFlash(__('Quyền hạn chưa sửa được.Xin hãy thử lại.'),'default',
+                    array('class' => 'alert alert-danger'));
             }
         }
         $permissions = $this->Permission->Find("first",array('conditions' => array('Permission.' . $this->Permission->primaryKey => $id)));
@@ -132,9 +136,11 @@ class PermissionsController extends AppController {
 			throw new NotFoundException(__('Invalid Permission'));
 		}
 		if ($this->Permission->delete()) {
-			$this->Session->setFlash(__('Quyền hạn đã được xóa'));
+            $this->Session->setFlash(__('Quyền hạn đã được xóa.'),'default',
+                array('class' => 'alert alert-success'));
 		} else {
-			$this->Session->setFlash(__('Quyền hạn chưa xóa được. Xin hãy thử lại.'));
+            $this->Session->setFlash(__('Quyền hạn chưa xóa được.Xin hãy thử lại.'),'default',
+                array('class' => 'alert alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}}

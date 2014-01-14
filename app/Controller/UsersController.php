@@ -62,10 +62,12 @@ class UsersController extends AppController {
                 "user_status"   => $this->request->data['User']['user_status']
             ));
 			if ($result) {
-				$this->Session->setFlash(__('Tài khoản đã được thêm.'));
+                $this->Session->setFlash(__('Thông tin người dùng đã được thêm.'),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('Tài khoản chưa được thêm.Xin hãy xem lại.'));
+                $this->Session->setFlash(__('Thông tin gười dùng chưa được thêm. Xin hãy xem lại.'),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		}
 	}
@@ -84,10 +86,12 @@ class UsersController extends AppController {
 		if ($this->request->is(array('post', 'put'))) {
             $this->request->data['User']['user_password'] = Security::hash($this->request->data['User']['user_password'], 'md5', 'my-salt');
 			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('Thông tin người dùng đã được sửa.'));
+                $this->Session->setFlash(__('Thông tin người dùng đã được sửa.'),'default',
+                    array('class' => 'alert alert-success'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('Thông tin người dùng chưa được sửa. Please, try again.'));
+                $this->Session->setFlash(__('Thông tin người dùng chưa được sửa. Xin hãy xem lại.'),'default',
+                    array('class' => 'alert alert-danger'));
 			}
 		} else {
 			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
@@ -122,9 +126,11 @@ class UsersController extends AppController {
 		}
 //		$this->request->onlyAllow('post', 'delete');
 		if ($this->User->delete()) {
-			$this->Session->setFlash(__('Người dùng đã được xóa.'));
+            $this->Session->setFlash(__('Người dùng đã được xóa.'),'default',
+                array('class' => 'alert alert-success'));
 		} else {
-			$this->Session->setFlash(__('Người dùng chưa được xóa. Xin hãy thử lại.'));
+            $this->Session->setFlash(__('Người dùng chưa được xóa. Xin hãy thử lại.'),'default',
+                array('class' => 'alert alert-danger'));
 		}
 		return $this->redirect(array('action' => 'index'));
 	}
