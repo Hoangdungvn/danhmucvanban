@@ -1,5 +1,5 @@
 <div class="tblusers index">
-	<h2><?php echo __('Quản lý người dùng'); ?></h2>
+	<h2><?php echo __('Danh sách người dùng'); ?></h2>
     <div class="row">
         <div class="col-sm-12"><div class="pull-right">
             <div class="dataTables_filter" id="datatable_filter">

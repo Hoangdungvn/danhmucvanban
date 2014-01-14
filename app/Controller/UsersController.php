@@ -13,7 +13,7 @@ class UsersController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator','Security');
 
 /**
  * admin_index method
@@ -24,6 +24,13 @@ class UsersController extends AppController {
 		$this->User->recursive = 0;
 		$this->set('users', $this->Paginator->paginate());
 	}
+
+    public function beforeFilter(){
+        parent::beforeFilter();
+        if(isset($this->params['prefix']) && $this->params['prefix'] == 'admin'){
+            $this->set('head_title','Quản lý người dùng');
+        }
+    }
 
 /**
  * admin_view method
@@ -48,11 +55,17 @@ class UsersController extends AppController {
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->User->create();
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The tbluser has been saved.'));
+            $result = $this->User->save(array(
+                "user_fullname" => $this->request->data['User']['user_fullname'],
+                "user_email"    => $this->request->data['User']['user_email'],
+                "user_password" => $md5 = Security::hash($this->request->data['User']['user_password'], 'md5', 'my-salt'),
+                "user_status"   => $this->request->data['User']['user_status']
+            ));
+			if ($result) {
+				$this->Session->setFlash(__('Tài khoản đã được thêm.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The tbluser could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('Tài khoản chưa được thêm.Xin hãy xem lại.'));
 			}
 		}
 	}
@@ -69,6 +82,7 @@ class UsersController extends AppController {
 			throw new NotFoundException(__('Invalid tbluser'));
 		}
 		if ($this->request->is(array('post', 'put'))) {
+            $this->request->data['User']['user_password'] = Security::hash($this->request->data['User']['user_password'], 'md5', 'my-salt');
 			if ($this->User->save($this->request->data)) {
 				$this->Session->setFlash(__('Thông tin người dùng đã được sửa.'));
 				return $this->redirect(array('action' => 'index'));

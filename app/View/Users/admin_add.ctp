@@ -1,20 +1,45 @@
 <div class="tblusers form">
-<?php echo $this->Form->create('Tbluser'); ?>
+<?php echo $this->Form->create('User',array(
+    'parsley-validate'=>''
+)); ?>
 	<fieldset>
-		<legend><?php echo __('Admin Add Tbluser'); ?></legend>
+		<legend><?php echo __('Thêm người sử dụng'); ?></legend>
 	<?php
-		echo $this->Form->input('user_fullname');
-		echo $this->Form->input('user_password');
-		echo $this->Form->input('user_email');
-		echo $this->Form->input('user_status');
+		echo $this->Form->input('user_fullname',array(
+            'label'=>'Họ và tên <em>*</em>',
+            'div' => 'form-group',
+            'parsley-trigger' => 'change',
+            'required' => 'required',
+            'class'    => 'form-control',
+            'placeholder' => 'Họ và tên',
+        ));
+		echo $this->Form->input('user_password',array(
+            'label'=>'Mật khẩu <em>*</em>',
+            'div' => 'form-group',
+            'parsley-trigger' => 'change',
+            'required' => 'required',
+            "type"  =>"password",
+            'class'    => 'form-control',
+            'placeholder' => 'Mật khẩu',
+        ));
+		echo $this->Form->input('user_email',array(
+        'label'=>'Email <em>*</em>',
+        'div' => 'form-group',
+        'parsley-trigger' => 'change',
+        'required' => 'required',
+        'class'    => 'form-control',
+        'placeholder' => 'Email',
+        ));
+        echo $this->Form->input('user_status', array(
+            'options' => array("0" => "Ẩn" ,"1" =>"Hiển thị"),
+            'default' => '1',
+            'label' =>'Trạng thái',
+            'div' => 'form-group',
+            'parsley-trigger' => 'change',
+            'required' => 'required',
+            'class'    => 'form-control'
+        ));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Html->link(__('List Tblusers'), array('action' => 'index')); ?></li>
-	</ul>
 </div>
