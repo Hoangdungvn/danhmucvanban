@@ -84,9 +84,15 @@ class DocumentsController extends AppController {
     {
         $cat_id = $this->request->query('cate_id');
         $_catModel = $this->Document->Cat->findByCateId($cat_id);
+        $_childArr = $this->Document->Cat->_getAllChildById($cat_id);
+        if(!$_childArr){
+            $_childArr = $cat_id;
+        }else{
+            $_childArr[] = $cat_id;
+        }
         $this->Paginator->settings = array(
             'conditions' => array(
-                'Document.cate_id' => $cat_id,
+                'Document.cate_id' => $_childArr,
                 'Document.document_status' => 1
             ),
             'order' => array('Document.document_signdate DESC'),

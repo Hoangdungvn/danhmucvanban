@@ -20,7 +20,8 @@ class Cat extends AppModel {
  */
 	public $primaryKey = 'cate_id';
 
-/**
+
+    /**
  * Validation rules
  *
  * @var array
@@ -93,6 +94,27 @@ class Cat extends AppModel {
         $_cateArr = $this->_getAllCate();
         $this->_recursive($_cateArr, 0, 0, $result);
         return $result;
+    }
+
+    public function _getChildrenId($parentId,&$_childArr ){
+        $_sql = $this->find('all',array(
+            'conditions' => array(
+                'Cat.parent_id' => $parentId,
+                'Cat.cate_status' => 1
+            ),
+            'fields' => array('Cat.cate_id')
+        ));
+        if(count($_sql)){
+            foreach($_sql as $_row){
+                $_childArr[] = $_row['Cat']['cate_id'];
+                $this->_getChildrenId($_row['Cat']['cate_id'], $_childArr);
+            }
+        }
+    }
+
+    public function _getAllChildById($id){
+        $this->_getChildrenId($id, $_childArr);
+        return $_childArr;
     }
 
 }
