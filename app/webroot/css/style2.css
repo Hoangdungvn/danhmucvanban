@@ -1631,6 +1631,8 @@ background:#dddddd;*/
     text-transform: uppercase;
     background: url(/img/yellow_green_long.gif) 0 0 no-repeat;
     margin-bottom: 10px;
+    width: 798px;
+    margin-left: -15px;
 }
 
 .btn-document-search{
@@ -1661,4 +1663,40 @@ background:#dddddd;*/
 
 #left-navigation .level-2{
     margin-left: 24px;
+}
+
+.main .col-md-12 {
+    border: 1px solid #ccc;
+    border-radius: 0px 0px 3px 3px;
+    background: #F5F8FD;
+}
+
+.box-content div.content-title {
+    width: 798px;
+    margin-left: -15px;
+    background: #b8e1fc; /* Old browsers */
+    background: -moz-linear-gradient(top, #b8e1fc 0%, #a9d2f3 10%, #90bae4 25%, #90bcea 37%, #90bff0 50%, #6ba8e5 51%, #a2daf5 83%, #bdf3fd 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b8e1fc), color-stop(10%,#a9d2f3), color-stop(25%,#90bae4), color-stop(37%,#90bcea), color-stop(50%,#90bff0), color-stop(51%,#6ba8e5), color-stop(83%,#a2daf5), color-stop(100%,#bdf3fd)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #b8e1fc 0%,#a9d2f3 10%,#90bae4 25%,#90bcea 37%,#90bff0 50%,#6ba8e5 51%,#a2daf5 83%,#bdf3fd 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b8e1fc', endColorstr='#bdf3fd',GradientType=0 ); /* IE6-9 */
+}
+
+.box-content div.content-title h3{
+    padding: 10px;;
+}
+.box-content .page-info{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.box-content .page-info span{
+    float: right;
+    margin-bottom: 20px;
+}
+
+.content #datatable_info {
+    margin-bottom: 20px;
 }

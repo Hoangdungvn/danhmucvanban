@@ -71,7 +71,7 @@ html, body {background:#006DD7;}
 #footer .footer-content .info p {line-height:150%;}
 
 #content-c {}
-#content-c #content {padding:0px 6px 6px;}
+#content-c #content {padding:0px 6px 6px;margin-top: -3px;}
 .box-3-cols {display:inline-block; clear:both; width:100%;}
 .home-left-235 {float:left; width:235px;}
 .home-right-740 {float:right; width:740px;}

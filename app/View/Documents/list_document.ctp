@@ -35,7 +35,7 @@
                                             echo 'old';
                                         } ?>">
                                             <td class=" sorting_1"><?php echo h($_document['Document']['document_symbol']) ?></td>
-                                            <td class="center"><?php echo h($_document['Document']['document_signdate']) ?></td>
+                                            <td class="center"><?php echo date("d/m/Y", strtotime($_document['Document']['document_signdate'])) ?></td>
                                             <td class="center">
                                                 <?php echo $this->Html->link(h($_document['Document']['docment_name']), array('controller' => 'documents', 'action' => 'view', $_document['Document']['docment_id'])) ?>
                                             </td>

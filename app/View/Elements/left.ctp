@@ -1,5 +1,5 @@
 <?php
-    echo $this->Html->link($this->Html->image("logo-CSDL.gif", array("border" => "0")),'http://vbpl.vn',array(
+    echo $this->Html->link($this->Html->image("logo-CSDL.gif", array("border" => "0","width"=>"177px")),'http://vbpl.vn',array(
         'target' => '_blank',
         'title'  => 'Cơ sở dữ liệu quốc gia về văn bản pháp luật',
         'style' => 'text-decoration:none',
